@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-[#A62C2C] to-[#CF0F47];
+}
+.logo{
+  font-family: 'Style Script';
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  display: none;
+}
+/*  */
+.custom-scrollbar::-webkit-scrollbar {
+  /* display: none; Chrome, Safari, Opera */
+  background: #f5f5f5;
+  border-radius: 20px;
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffc800;
+  border-radius: 20px;
+  width: 2px;
+ 
+}
+.slider::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 90%;
+  background-color: #ffbf00;
+  height: 2px;
+  width: 0;
+  transition: 0.2s ease-out;
+}
+.slider:hover::after {
+  width: 90%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13{ 
+  100%{transform: rotate(1turn)}
+}
+
+@theme {
+  --color-primary: #ffbf00;
+  --color-secondary: #ffbf00;
+  --color-textPrimary: #dfa702;
+}
+
+
