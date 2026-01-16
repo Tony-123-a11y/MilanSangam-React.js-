@@ -2,15 +2,9 @@ import axios from "axios";
 import { store } from "../Redux/Store";
 import { logOutUser, updateLoader } from "../Features/Userslice";
 
-// Base URL
-// const API_URL = "http://localhost:3040/api";
-
-const API_URL = "https://vivah-sanyog-backend.onrender.com/api";
-// const API_URL = "https://api.4xdollar.com/vivah/api";
-
 // Create Axios instance
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: import.meta.env.API_URL,
 });
 
 // 🔐 Request Interceptor – Attach token
