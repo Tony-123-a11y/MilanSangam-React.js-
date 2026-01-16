@@ -4,8 +4,9 @@ import { logOutUser, updateLoader } from "../Features/Userslice";
 
 // Create Axios instance
 const apiClient = axios.create({
-  baseURL: import.meta.env.API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
 });
+
 
 // 🔐 Request Interceptor – Attach token
 apiClient.interceptors.request.use(
