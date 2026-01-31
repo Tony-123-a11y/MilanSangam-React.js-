@@ -50,11 +50,11 @@ const ProfileCard = ({ match, showBtns = true, user,removeShortListBtn=false }) 
       key={match?._id}
       className="flex  items-center justify-center rounded-lg max-sm:block  overflow-hidden border border-gray-300 "
     >
-      <Link to={"/profileDetails"} state={match} className="relative w-1/3">
+      <Link to={"/profileDetails"} state={match} className="relative w-1/3 ">
         <img
           src={match?.profilePhotos?.[0] || "/placeholder.svg"}
           alt={user?.fullName}
-          className="w-full h-54 object-cover max-sm:border-b border-gray-300 max-sm:h-64 "
+          className="w-full h-61 object-cover  max-sm:border-b border-gray-300 max-sm:h-64 "
         />
       </Link>
 

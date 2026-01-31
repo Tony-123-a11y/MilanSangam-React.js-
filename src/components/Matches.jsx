@@ -1,23 +1,26 @@
-import { Heart, X, Star, MessageSquare, PhoneCall } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useState } from "react";
 import { getMatches } from "../services/api.service";
 import { useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Matches() {
   const user = useSelector((state) => state.user.user);
-  const [matches, setmatches] = useState();
+  const userId= user?._id;
+ const { data:matches, isLoading, error }=useQuery({
+   queryKey:['matches',userId],
+   queryFn: ()=>getMatches(userId),
+   enabled:!!userId,
+  staleTime: 5 * 60 * 1000,
+   select: (response) => response.data.matches,
+ })
+if (isLoading) {
+  return <p>Loading matches...</p>
+}
 
-  useEffect(() => {
-    const getMatchedUsers = async () => {
-      if (!user?._id) return;
-      const res = await getMatches(user._id);
-      console.log("matches", res);
-      setmatches(res.data.matches);
-    };
-    getMatchedUsers();
-  }, [user]);
+   if (error) {
+  return <p>Something went wrong while loading matches.</p>
+}
 
 
 
