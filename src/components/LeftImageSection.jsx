@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import image from "../assets/auth/1.png";
-import image2 from "../assets/auth/2.png";
-import image3 from "../assets/auth/3.png";
-import image4 from "../assets/auth/4.png";
-import image5 from "../assets/auth/5.png";
-const imageList = [image, image2, image3, image4, image5];
+
+import image2 from "../assets/ghoda2.png";
+import image3 from "../assets/mandap.png";
+import image4 from "../assets/mandap2.png";
+const imageList = [ image2, image3, image4];
 
 const LeftImageSection = ({ altText = "Matrimony" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

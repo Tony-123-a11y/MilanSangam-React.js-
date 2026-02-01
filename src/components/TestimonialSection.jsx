@@ -2,12 +2,12 @@ import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
 import { useRef } from "react";
 
-import testImgae from "../assets/test.png";
-import testImgae2 from "../assets/test2.png";
-import testImgae3 from "../assets/test3.png";
-import testImgae4 from "../assets/test4.png";
-import testImgae5 from "../assets/test5.png";
-import testImgae6 from "../assets/test6.png";
+import testImgae from "../assets/dummy.png";
+import testImgae2 from "../assets/dummy.png";
+import testImgae3 from "../assets/dummy.png";
+import testImgae4 from "../assets/dummy.png";
+import testImgae5 from "../assets/dummy.png";
+import testImgae6 from "../assets/dummy.png";
 
 const testimonials = [
   {
