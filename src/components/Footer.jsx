@@ -44,7 +44,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Corporate</h3>
           <ul className="space-y-2 text-white text-sm">
             <li>
-              <Link to="/about">Contact Us</Link>
+              <Link to="/contact">Contact Us</Link>
             </li>
             
             <li>

@@ -2,9 +2,8 @@ import React, { Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-/* Layouts */
+/* Layout */
 import MainLayout from "./layouts/MainLayout";
-import AuthLayout from "./layouts/AuthLayout";
 import ProfileLayout from "./layouts/ProfileLayout";
 
 /* Common */
@@ -20,6 +19,7 @@ import { profileRoutes } from "./routes/ProfileRoutes";
 /* Redux */
 import { fetchUser } from "./Features/Userslice";
 import { connectSocket } from "./Features/SocketSlice";
+import ScrollToTop from "./components/ScrollToTop";
 
 /* Helper to render nested routes */
 const renderRoutes = (routes) =>
@@ -30,32 +30,38 @@ const renderRoutes = (routes) =>
   ));
 
 const App = () => {
-  const { token, user, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+  const { token, user, isAuthenticated } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   /* Fetch user on refresh */
   useEffect(() => {
-    if (token) dispatch(fetchUser());
+    if (token) {
+      dispatch(fetchUser());
+    }
   }, [token, dispatch]);
 
   /* Connect socket after user load */
   useEffect(() => {
-    if (user?._id) dispatch(connectSocket(user._id));
+    if (user?._id) {
+      dispatch(connectSocket(user._id));
+    }
   }, [user, dispatch]);
 
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTop />
+
       <Routes>
-
-        {/* ================= MAIN LAYOUT (Navbar + Footer) ================= */}
+        {/* 🔥 MAIN LAYOUT — NAVBAR + FOOTER ON ALL PAGES */}
         <Route element={<MainLayout />}>
-
           {/* Public Pages */}
           {renderRoutes(publicRoutes)}
 
-          {/* Profile Pages (Navbar SHOULD show here) */}
+          {/* Auth Pages (Login / Register etc.) */}
+          {renderRoutes(authRoutes(isAuthenticated))}
+
+          {/* Profile Pages (Protected) */}
           <Route
             path="/profile"
             element={
@@ -66,17 +72,10 @@ const App = () => {
           >
             {renderRoutes(profileRoutes)}
           </Route>
-
         </Route>
 
-        {/* ================= AUTH LAYOUT (NO Navbar) ================= */}
-        <Route element={<AuthLayout />}>
-          {renderRoutes(authRoutes(isAuthenticated))}
-        </Route>
-
-        {/* ================= 404 ================= */}
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
-
       </Routes>
     </Suspense>
   );
