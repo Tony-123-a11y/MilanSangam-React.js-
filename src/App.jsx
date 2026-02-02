@@ -13,9 +13,9 @@ import PageLoader from "./components/PageLoader";
 import NotFound from "./pages/NotFound";
 
 /* Route configs */
-import { publicRoutes } from "./routes/publicRoutes";
-import { authRoutes } from "./routes/authRoutes";
-import { profileRoutes } from "./routes/profileRoutes";
+import { publicRoutes } from "./routes/PublicRoutes";
+import { authRoutes } from "./routes/AuthRoutes";
+import { profileRoutes } from "./routes/ProfileRoutes";
 
 /* Redux */
 import { fetchUser } from "./Features/Userslice";
