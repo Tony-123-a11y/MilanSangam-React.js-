@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import JourneyBegins from "../components/JourneyBegins";
-import ConciergeSection from "../components/ConciergeSection";
+// import ConciergeSection from "../components/ConciergeSection";
 import TestimonialSection from "../components/TestimonialSection";
 import BlogSection from "../components/BlogSection";
 import Faqs from "../components/Faqs";

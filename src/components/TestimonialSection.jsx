@@ -2,55 +2,56 @@ import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
 import { useRef } from "react";
 
-import testImgae from "../assets/dummy.png";
-import testImgae2 from "../assets/dummy.png";
-import testImgae3 from "../assets/dummy.png";
-import testImgae4 from "../assets/dummy.png";
-import testImgae5 from "../assets/dummy.png";
-import testImgae6 from "../assets/dummy.png";
+
+import testImage1 from "../assets/testimonial/testimonial1.png";
+import testImage2 from "../assets/testimonial/testimonial2.png";
+import testImage3 from "../assets/testimonial/testimonial3.png";
+import testImage4 from "../assets/testimonial/testimonial4.png";
+import testImage5 from "../assets/testimonial/testimonial5.png";
+import testImage6 from "../assets/testimonial/testimonial6.png";
 
 const testimonials = [
   {
     name: "Amit & Aisha",
-    location: "Maharajganj, India",
-    image: testImgae,
+    location: "Lucknow, Uttar Pradesh",
+    image: testImage1,
     feedback:
-      "Thanks to this platform, I found my soulmate! Everything felt easy and genuine. Highly recommended!",
+      "We connected instantly through this platform. The profiles felt genuine and the process was smooth. Today, we’re happily married and grateful for this beautiful beginning.",
   },
   {
-    name: "praveen & Neha",
-    location: "Maharajganj, India",
-    image: testImgae2,
+    name: "Praveen & Neha",
+    location: "Patna, Bihar",
+    image: testImage2,
     feedback:
-      "The Elite Concierge guided us with unmatched personal care. We never felt alone in the journey.",
+      "What we loved most was the personal touch. From matching preferences to guidance, everything felt thoughtful. We found trust, comfort, and finally each other.",
   },
   {
     name: "Karan & Priya",
-    location: "Bangalore, India",
-    image: testImgae3,
+    location: "Bengaluru, Karnataka",
+    image: testImage3,
     feedback:
-      "After years of searching, this site helped us meet in just a few months. We’re forever grateful!",
+      "We were both busy professionals and didn’t expect much. But this platform surprised us. The compatibility was real, and conversations felt natural from day one.",
   },
   {
     name: "Vikram & Aarti",
-    location: "Mumbai, India",
-    image: testImgae4,
+    location: "Indore, Madhya Pradesh",
+    image: testImage4,
     feedback:
-      "Absolutely the best matchmaking experience! We matched on our values and goals, not just looks.",
+      "This wasn’t just matchmaking, it felt like someone actually cared. Our values matched perfectly, and today we’re building a future together with confidence.",
   },
   {
     name: "Sahil & Riya",
-    location: "Hyderabad, India",
-    image: testImgae5,
+    location: "Jaipur, Rajasthan",
+    image: testImage5,
     feedback:
-      "We both were hesitant at first, but one chat changed everything. Thank you for bringing us together!",
+      "We were hesitant initially, but the experience felt safe and respectful. One meaningful conversation turned into countless memories. Truly thankful for this journey.",
   },
   {
     name: "Tarun & Isha",
-    location: "Chennai, India",
-    image: testImgae6,
+    location: "Coimbatore, Tamil Nadu",
+    image: testImage6,
     feedback:
-      "We tried other platforms too, but this one felt the most human and respectful. We're now engaged!",
+      "Unlike other platforms, this one felt honest and calm. No pressure, no rush—just genuine connections. We’re now engaged and couldn’t be happier.",
   },
 ];
 

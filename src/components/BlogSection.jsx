@@ -1,183 +1,179 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import testImage from "../assets/test4.png";
-import testImage2 from "../assets/test2.png";
-import testImage3 from "../assets/test3.png";
+import blogImg1 from "../assets/blog/blog1.png";
+import blogImg2 from "../assets/blog/blog2.png";
+import blogImg3 from "../assets/blog/blog3.png";
+import blogImg4 from "../assets/blog/blog4.png";
+import blogImg5 from "../assets/blog/blog5.png";
+import blogImg6 from "../assets/blog/blog6.png";
 
 
 
 const blogs = [
   {
-    title: "Vivah Sanyog: More Than Just a Match – It’s a Journey of Togetherness",
+    image: blogImg1,
+    title: "Vivah Sanyog: More Than a Match, A Meaningful Life Journey",
     content: {
       intro:
-        "In the realm of matrimony, finding a life partner transcends mere compatibility; it's about embarking on a shared journey of love, trust, and mutual growth. At Vivah Sanyog, we believe that every union is a meaningful convergence of souls, destined to create a harmonious life together.",
+        "Marriage is not just about finding a partner; it’s about building a shared life rooted in trust, respect, and understanding.",
       body: [
         {
-          heading: "The Essence of 'Sanyog'",
+          heading: "A Deeper Meaning of Compatibility",
           para:
-            "'Sanyog' signifies a destined union, a coming together of two individuals meant to complement and support each other through life's myriad experiences."
+            "True compatibility goes beyond preferences and looks. It lies in emotional connection and shared values.",
         },
         {
-          heading: "Beyond Algorithms",
+          heading: "Human-Centered Matchmaking",
           para:
-            "While technology aids in matching profiles, we emphasize understanding individual aspirations, values, and cultural nuances to foster genuine connections."
+            "We focus on understanding individuals, not just matching profiles.",
         },
         {
-          heading: "Real-Life Success Stories",
+          heading: "Stories That Inspire",
           para:
-            "Our platform has been instrumental in uniting countless couples who found not just partners but lifelong companions. [Include anonymized testimonials or anecdotes.]"
+            "Thousands of couples have found lifelong companionship through our platform.",
         },
-        {
-          heading: "Continuous Support",
-          para:
-            "From profile creation to post-marriage guidance, Vivah Sanyog offers unwavering support to ensure a seamless journey towards marital bliss."
-        }
       ],
       conclusion:
-        "Choosing Vivah Sanyog means embracing a partner in your quest for love, understanding, and a fulfilling life together. Let us be the bridge to your destined union."
-    }
+        "Vivah Sanyog walks with you at every step toward a meaningful married life.",
+    },
   },
   {
-    title: "5 Signs You’ve Found the Right Life Partner",
+    image: blogImg2,
+    title: "5 Clear Signs You’ve Found the Right Life Partner",
     content: {
       intro:
-        "Identifying the right life partner involves recognizing signs that indicate deep compatibility and mutual respect. Here are five indicators that you've met someone truly special.",
+        "Finding the right partner often feels natural. Here are signs that confirm you’re on the right path.",
       body: [
         {
-          heading: "Emotional Safety",
+          heading: "Emotional Comfort",
           para:
-            "You feel secure expressing your thoughts and emotions without fear of judgment."
+            "You feel calm, safe, and understood around them.",
         },
         {
-          heading: "Open Communication",
+          heading: "Aligned Values",
           para:
-            "Conversations flow effortlessly, encompassing both trivial and profound topics."
+            "Life goals, beliefs, and priorities naturally match.",
         },
         {
-          heading: "Shared Values",
+          heading: "Mutual Respect",
           para:
-            "Fundamental beliefs and life goals align, providing a solid foundation for the future."
+            "Decisions are made together, with care and understanding.",
         },
-        {
-          heading: "Mutual Growth",
-          para:
-            "Both partners encourage and support each other's personal and professional development."
-        },
-        {
-          heading: "Future Vision",
-          para:
-            "There's a shared enthusiasm for building a life together, encompassing dreams and aspirations."
-        }
       ],
       conclusion:
-        "Recognizing these signs can affirm that you're on the path to a harmonious and enduring partnership."
-    }
+        "When trust and comfort come together, a strong bond is formed.",
+    },
   },
   {
-    title: "Vivah in the Digital Age: Why Matrimony Portals Still Work",
+    image: blogImg3,
+    title: "Why Matrimony Platforms Still Matter Today",
     content: {
       intro:
-        "In an era dominated by dating apps, traditional matrimony portals like Vivah Sanyog continue to hold significant relevance. Here's why they remain integral to modern matchmaking.",
+        "Even in the age of dating apps, matrimony platforms continue to build meaningful, lasting relationships.",
       body: [
         {
-          heading: "Serious Intentions",
+          heading: "Clear Intentions",
           para:
-            "Matrimony platforms attract individuals genuinely seeking long-term commitments."
+            "People join with a serious mindset for marriage.",
         },
         {
-          heading: "Cultural Compatibility",
+          heading: "Cultural Understanding",
           para:
-            "These portals consider cultural, religious, and familial preferences, ensuring holistic compatibility."
+            "Family values and traditions play a key role.",
         },
         {
           heading: "Verified Profiles",
           para:
-            "Enhanced verification processes build trust and authenticity among users."
+            "Trust and safety are always prioritized.",
+        },
+      ],
+      conclusion:
+        "Matrimony platforms bridge tradition and modern relationships.",
+    },
+  },
+  {
+    image: blogImg4,
+    title: "How to Write a Matrimony Profile That Feels Real",
+    content: {
+      intro:
+        "Your profile is your first impression. Keeping it real makes all the difference.",
+      body: [
+        {
+          heading: "Be Honest",
+          para:
+            "Authenticity attracts the right people.",
+        },
+        {
+          heading: "Share Your Lifestyle",
+          para:
+            "Mention what truly matters in daily life.",
+        },
+        {
+          heading: "Use Recent Photos",
+          para:
+            "Clear images build trust and confidence.",
+        },
+      ],
+      conclusion:
+        "A genuine profile leads to genuine connections.",
+    },
+  },
+  {
+    image: blogImg5,
+    title: "From First Chat to Marriage: Building Trust",
+    content: {
+      intro:
+        "Strong marriages begin with meaningful conversations and patience.",
+      body: [
+        {
+          heading: "Open Communication",
+          para:
+            "Talk openly about expectations and future plans.",
+        },
+        {
+          heading: "Take Time",
+          para:
+            "Rushing often leads to misunderstandings.",
         },
         {
           heading: "Family Involvement",
           para:
-            "Facilitates family participation, respecting traditional matchmaking practices."
-        }
+            "Family support strengthens relationships.",
+        },
       ],
       conclusion:
-        "Vivah Sanyog seamlessly blends traditional values with modern technology, providing a reliable avenue for finding a life partner."
-    }
+        "Trust grows slowly but lasts forever.",
+    },
   },
   {
-    title: "Tips for Writing a Matrimony Profile That Truly Reflects You",
+    image: blogImg6,
+    title: "Arranged Marriage in Modern Times: A New Perspective",
     content: {
       intro:
-        "Your matrimony profile is a reflection of your personality and aspirations. Crafting it thoughtfully can significantly impact your matchmaking journey.",
+        "Arranged marriages today are about choice, consent, and compatibility.",
       body: [
         {
-          heading: "Authentic Introduction",
+          heading: "Choice Comes First",
           para:
-            "Begin with a genuine portrayal of yourself, highlighting key aspects of your personality."
+            "Modern arranged marriages respect individual decisions.",
         },
         {
-          heading: "Clear Preferences",
+          heading: "Balanced Approach",
           para:
-            "Articulate your expectations and what you seek in a partner with clarity."
+            "Tradition blends smoothly with modern thinking.",
         },
         {
-          heading: "Positive Tone",
+          heading: "Stronger Foundations",
           para:
-            "Maintain an optimistic and respectful tone throughout your profile."
+            "Families and individuals build trust together.",
         },
-        {
-          heading: "Concise Content",
-          para:
-            "Be succinct, ensuring your profile is engaging and easy to read."
-        },
-        {
-          heading: "Recent Photographs",
-          para:
-            "Include clear and recent images to provide a true representation of yourself."
-        }
       ],
       conclusion:
-        "A well-crafted profile serves as a compelling introduction, paving the way for meaningful connections."
-    }
+        "Modern arranged marriages are partnerships built on understanding.",
+    },
   },
-  {
-    title: "From Chat to Shaadi: How to Build a Relationship the Right Way",
-    content: {
-      intro:
-        "Transitioning from initial conversations to a lifelong commitment involves deliberate steps and mutual understanding. Here's a guide to nurturing your relationship journey.",
-      body: [
-        {
-          heading: "Establish Trust",
-          para:
-            "Build a foundation of trust through honest and consistent communication."
-        },
-        {
-          heading: "Understand Each Other",
-          para:
-            "Engage in discussions about values, life goals, and expectations."
-        },
-        {
-          heading: "Family Engagement",
-          para:
-            "Involve families early in the process to ensure collective harmony."
-        },
-        {
-          heading: "Plan Meetings",
-          para:
-            "Arrange in-person meetings to deepen your connection and assess compatibility."
-        },
-        {
-          heading: "Seek Guidance",
-          para:
-            "Don't hesitate to seek advice from mentors or counselors when needed."
-        }
-      ],
-      conclusion:
-        "Navigating the path from acquaintance to marriage requires patience, empathy, and proactive efforts. With Vivah Sanyog, you're supported every step of the way."
-    }
-  }
 ];
+
 
 
 const BlogSection = () => {
@@ -205,11 +201,12 @@ const BlogSection = () => {
               key={i}
               className="bg-gray-50   rounded-2xl  p-1 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300"
             >
-              <div className="h-56 md:h-64 overflow-hidden group">
+              <div className="relative aspect-square w-full overflow-hidden group">
                 <img
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-full object-cover rounded-2xl object-top group-hover:scale-105 transition duration-500"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="p-5">

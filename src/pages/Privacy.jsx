@@ -6,7 +6,8 @@ const Privacy = () => {
       </h1>
 
       <p className="text-gray-600 text-center mt-3">
-        Your privacy is important to us. Learn how we protect your data.
+        Milan Sangam respects your privacy and is committed to protecting your
+        personal information.
       </p>
 
       <div className="mt-10 space-y-8 text-gray-700 text-sm md:text-base leading-relaxed">
@@ -15,8 +16,8 @@ const Privacy = () => {
             1. Information We Collect
           </h2>
           <p className="mt-2">
-            We collect personal details such as name, email, and profile
-            information to provide matchmaking services effectively.
+            We collect personal details such as name, email, contact number,
+            photographs, and profile information provided during registration.
           </p>
         </section>
 
@@ -25,37 +26,60 @@ const Privacy = () => {
             2. Use of Information
           </h2>
           <p className="mt-2">
-            Your information is used to improve matches, enhance user
-            experience, and ensure platform security.
+            Collected information is used to provide matchmaking services,
+            improve platform functionality, process payments, and ensure
+            security.
           </p>
         </section>
 
         <section>
           <h2 className="font-semibold text-lg text-gray-800">
-            3. Data Protection
+            3. Payment Information
           </h2>
           <p className="mt-2">
-            We use industry-standard security measures to protect your data
-            against unauthorized access or disclosure.
+            Payment transactions are processed securely through trusted third-
+            party payment gateways. Milan Sangam does not store card or UPI
+            details on its servers.
           </p>
         </section>
 
         <section>
           <h2 className="font-semibold text-lg text-gray-800">
-            4. Third-Party Sharing
+            4. Data Security
           </h2>
           <p className="mt-2">
-            We do not sell or share your personal data with third parties
-            without consent, except when required by law.
+            We implement reasonable technical and organizational measures to
+            safeguard your data against unauthorized access, misuse, or loss.
           </p>
         </section>
 
         <section>
           <h2 className="font-semibold text-lg text-gray-800">
-            5. Your Consent
+            5. Data Sharing
           </h2>
           <p className="mt-2">
+            We do not sell personal information to third parties. Data may be
+            shared only with trusted service providers or when required by law.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-lg text-gray-800">
+            6. User Control & Consent
+          </h2>
+          <p className="mt-2">
+            Users may update or delete their profile information at any time.
             By using Milan Sangam, you consent to this Privacy Policy.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-semibold text-lg text-gray-800">
+            7. Policy Updates
+          </h2>
+          <p className="mt-2">
+            This Privacy Policy may be updated periodically. Continued use of
+            the platform indicates acceptance of the updated policy.
           </p>
         </section>
       </div>
