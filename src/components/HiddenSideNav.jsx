@@ -22,74 +22,73 @@ const HiddenSideNav = ({ setShowNav }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const links = [
-    {
-      icon: <LiaUserFriendsSolid />,
-      text: "matches",
-      path: "/profile",
-    },
-    {
-      icon: <SiActivitypub />,
-      text: "activity",
-      path: "/profile/activity",
-    },
-    {
-      icon: <IoSearchSharp />,
-      text: "search",
-      path: "/profile/search",
-    },
-    {
-      icon: <CgProfile />,
-      text: "My Profile",
-      path: "/profile/myProfile",
-    },
-
-    {
-      icon: <MdOutlineModeEdit />,
-      text: "Edit Profile",
-      path: "/profile/editProfile",
-    },
-    {
-      icon: <BsChatSquareDots />,
-      text: "Chats/Message",
-      path: "/profile/chats",
-    },
-    {
-      icon: <LiaUserFriendsSolid />,
-      text: "ShortListed Profiles",
-      path: "/profile/shortListProfile",
-    },
-    {
-      icon: <CiCircleCheck />,
-      text: "Accepted Profiles",
-      path: "/profile/acceptProfile",
-    },
-    {
-      icon: <RxCrossCircled />,
-      text: "Rejected Profiles",
-      path: "/profile/rejectProfile",
-    },
-    {
-      icon: <RiUserReceivedLine />,
-      text: "Interests Recieved",
-      path: "/packages",
-    },
-    {
-      icon: <TbUserShare />,
-      text: "Interests Sent",
-      path: "/packages",
-    },
-    {
-      icon: <MdOutlineWorkspacePremium />,
-      text: "Packages",
-      path: "/packages",
-    },
-    {
-      icon: <LuBrain />,
-      text: "Intellectual Match",
-      path: "/intellectualMatch",
-    },
-  ];
+const links = [
+  {
+    icon: <LiaUserFriendsSolid />,
+    text: "Matches",
+    path: "/profile",
+  },
+  {
+    icon: <SiActivitypub />,
+    text: "Activity",
+    path: "/profile/activity",
+  },
+  {
+    icon: <IoSearchSharp />,
+    text: "Search",
+    path: "/profile/search",
+  },
+  {
+    icon: <CgProfile />,
+    text: "My Profile",
+    path: "/profile/myProfile",
+  },
+  {
+    icon: <MdOutlineModeEdit />,
+    text: "Edit Profile",
+    path: "/profile/editProfile",
+  },
+  {
+    icon: <BsChatSquareDots />,
+    text: "Chats / Messages",
+    path: "/profile/chats",
+  },
+  {
+    icon: <LiaUserFriendsSolid />,
+    text: "Shortlisted Profiles",
+    path: "/profile/shortListProfile",
+  },
+  {
+    icon: <CiCircleCheck />,
+    text: "Accepted Profiles",
+    path: "/profile/acceptProfile",
+  },
+  {
+    icon: <RxCrossCircled />,
+    text: "Rejected Profiles",
+    path: "/profile/rejectProfile",
+  },
+  {
+    icon: <RiUserReceivedLine />,
+    text: "Interests Received",
+    path: "/profile/interests-received",
+  },
+  {
+    icon: <TbUserShare />,
+    text: "Interests Sent",
+    path: "/profile/interests-sent",
+  },
+  {
+    icon: <MdOutlineWorkspacePremium />,
+    text: "Packages",
+    path: "/packages",
+  },
+  {
+    icon: <LuBrain />,
+    text: "Intellectual Match",
+    path: "/intellectualMatch",
+  },
+];
 
   const handleLogout = () => {
     dispatch(logOutUser());

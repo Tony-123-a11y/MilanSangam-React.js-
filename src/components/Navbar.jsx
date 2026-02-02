@@ -14,12 +14,17 @@ import SideNav from "./SideNav";
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const [showNav, setshowNav] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  let closeTimer;
   return (
     <>
       <nav className="bg-white shadow-sm z-100 sticky top-0 left-0 w-full">
         <div className=" mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-4">
+          <Link
+            to={isAuthenticated ? "/profile" : "/"}
+            className="flex items-center gap-4"
+          >
             <img src={logo} alt="Logo" className="w-11 font-['montserrat']" />
             <div>
               <h3 className="font-bold logo text-2xl tracking-wider text-amber-500 leading-5 max-sm:text-xl">
@@ -39,44 +44,67 @@ const Navbar = () => {
                 <Link to="/profile">Home</Link>
 
                 {/* Dropdown */}
-                <div className="group relative cursor-pointer">
-                  <span className="flex items-center gap-1">
+                <div
+                  className="relative"
+                  onMouseEnter={() => {
+                    clearTimeout(closeTimer);
+                    setOpenDropdown(true);
+                  }}
+                  onMouseLeave={() => {
+                    closeTimer = setTimeout(() => {
+                      setOpenDropdown(false);
+                    }, 150);
+                  }}
+                >
+                  <span className="flex items-center gap-1 cursor-pointer select-none">
                     Relevent Profile ▾
                   </span>
-                  <div className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white shadow-xl rounded-md mt-2 w-44 z-50">
-                    
-                    <Link
-                      to="/under-25-profiles"
-                      className="px-4 py-2 hover:bg-gray-100"
-                    >
-                      Under 25 Profiles
-                    </Link>
-                    <Link
-                      to="/under-30-profiles"
-                      className="px-4 py-2 hover:bg-gray-100"
-                    >
-                      Under 30 Profiles
-                    </Link>
-                    <Link
-                      to="/under-35-profiles"
-                      className="px-4 py-2 hover:bg-gray-100"
-                    >
-                      Under 35 Profiles
-                    </Link>
-                    <Link
-                      to="/under-40-profiles"
-                      className="px-4 py-2 hover:bg-gray-100"
-                    >
-                      Under 40 Profiles
-                    </Link>
-                    <Link
-                      to="/divorce-profiles"
-                      className="px-4 py-2 hover:bg-gray-100"
-                    >
-                      Divorce Profiles
-                    </Link>
-                  </div>
+
+                  {openDropdown && (
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-md z-50">
+                      <Link
+                      to="/profile/profiles/under-25"
+                        onClick={() => setOpenDropdown(false)}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Under 25 Profiles
+                      </Link>
+
+                      <Link
+                       to="/profile/profiles/under-30"
+                        onClick={() => setOpenDropdown(false)}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Under 30 Profiles
+                      </Link>
+
+                      <Link
+                    to="/profile/profiles/under-35"
+                        onClick={() => setOpenDropdown(false)}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Under 35 Profiles
+                      </Link>
+
+                      <Link
+                       to="/profile/profiles/under-40"
+                        onClick={() => setOpenDropdown(false)}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Under 40 Profiles
+                      </Link>
+
+                      <Link
+                     to="/profile/profiles/divorce"
+                        onClick={() => setOpenDropdown(false)}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Divorce Profiles
+                      </Link>
+                    </div>
+                  )}
                 </div>
+
                 <Link to="/profile/search">Search Your Partner</Link>
                 <Link to="/matches">Perfect Matches</Link>
                 <Link to="/profile/shortListProfile">Shortlisted Profiles</Link>
@@ -113,20 +141,19 @@ const Navbar = () => {
             )}
 
             {/* Mobile Menu Toggle */}
-            {
-              isAuthenticated && <div className="md:hidden h-6">
-              {!showNav ? (
-                <button onClick={() => setshowNav(true)}>
-                  <FaBars className="text-2xl text-gray-700 hover:text-amber-500 transition" />
-                </button>
-              ) : (
-                <button onClick={() => setshowNav(false)}>
-                  <IoMdClose className="text-2xl text-gray-600 hover:text-red-500 transition" />
-                </button>
-              )}
-            </div>
-            }
-            
+            {isAuthenticated && (
+              <div className="md:hidden h-6">
+                {!showNav ? (
+                  <button onClick={() => setshowNav(true)}>
+                    <FaBars className="text-2xl text-gray-700 hover:text-amber-500 transition" />
+                  </button>
+                ) : (
+                  <button onClick={() => setshowNav(false)}>
+                    <IoMdClose className="text-2xl text-gray-600 hover:text-red-500 transition" />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>

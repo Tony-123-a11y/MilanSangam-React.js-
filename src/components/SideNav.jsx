@@ -1,43 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import { SiActivitypub } from "react-icons/si";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { GiUpgrade } from "react-icons/gi";
-import { useAuth } from "../context/AuthContext";
-import { FiLogOut } from "react-icons/fi";
 import { BsChatSquareDots } from "react-icons/bs";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { CiCircleCheck } from "react-icons/ci";
-import { RiUserReceived2Line, RiUserReceivedLine } from "react-icons/ri";
+import { RiUserReceivedLine } from "react-icons/ri";
 import { RxCrossCircled } from "react-icons/rx";
 import { TbUserShare } from "react-icons/tb";
 import { LuBrain } from "react-icons/lu";
+import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../Features/Userslice";
+
 const SideNav = () => {
   const { profileData } = useSelector((state) => state.user);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
- 
+  // ✅ CLEAN & UNIQUE ROUTES (no duplicates)
   const links = [
     {
       icon: <LiaUserFriendsSolid />,
-      text: "matches",
+      text: "Matches",
       path: "/profile",
     },
     {
       icon: <SiActivitypub />,
-      text: "activity",
+      text: "Activity",
       path: "/profile/activity",
     },
     {
       icon: <IoSearchSharp />,
-      text: "search",
+      text: "Search",
       path: "/profile/search",
     },
     {
@@ -45,7 +43,6 @@ const SideNav = () => {
       text: "My Profile",
       path: "/profile/myProfile",
     },
-
     {
       icon: <MdOutlineModeEdit />,
       text: "Edit Profile",
@@ -53,10 +50,9 @@ const SideNav = () => {
     },
     {
       icon: <BsChatSquareDots />,
-      text: "Chats/Message",
+      text: "Chats / Messages",
       path: "/profile/chats",
     },
-
     {
       icon: <CiCircleCheck />,
       text: "Accepted Profiles",
@@ -69,13 +65,13 @@ const SideNav = () => {
     },
     {
       icon: <RiUserReceivedLine />,
-      text: "Interests Recieved",
-      path: "/packages",
+      text: "Interests Received",
+      path: "/profile/interests-received",
     },
     {
       icon: <TbUserShare />,
       text: "Interests Sent",
-      path: "/packages",
+      path: "/profile/interests-sent",
     },
     {
       icon: <MdOutlineWorkspacePremium />,
@@ -94,63 +90,63 @@ const SideNav = () => {
     navigate("/");
   };
 
-  const linkClasses = ({ isActive }) => {
-    return `py-2.5       rounded-md transition duration-75  px-4 flex items-center justify-start gap-4    ${
-      isActive ? "bg-primary text-white" : "hover:bg-amber-200"
-    }`;
-  };
-
   return (
-    <div className="  py-10 pb-20 px-2  overflow-y-scroll h-full  custom-scrollbar bg-amber-100">
-      <div className="gap-4 px-4 flex items-center justify-center max-xl:px-0">
+    <div className="py-10 pb-20 px-2 h-full overflow-y-scroll custom-scrollbar bg-amber-100 flex flex-col">
+      
+      {/* Profile Avatar */}
+      <div className="px-4 flex flex-col items-center">
         <Link
-          to={"/profile/myProfile"}
-          className="rounded-full w-16 h-16 border border-gray-100 flex items-center justify-center bg-gray-100"
+          to="/profile/myProfile"
+          className="w-16 h-16 rounded-full border bg-gray-100 flex items-center justify-center"
         >
           {profileData?.profilePic?.[0] ? (
             <img
               src={profileData.profilePic[0]}
               alt="Profile"
-              className="rounded-full w-16 h-16 object-cover"
+              className="w-16 h-16 rounded-full object-cover"
             />
           ) : (
             <CgProfile className="text-4xl text-gray-400" />
           )}
         </Link>
-      </div>
-      <h1 className="text-2xl text-center leading-5 font-semibold mt-4">
-        {profileData?.personalInfo?.fullName}
-      </h1>
-      <hr className="text-gray-300 mt-5 w-[90%] m-auto" />
-      <div className="mt-4 font-secondaryHead space-y-1">
-        {links.map((link) => {
-          return (
-            <NavLink
-              to={link.path}
-              key={link.text}
-              end={link.path === "/profile"}
-              className={linkClasses}
-            >
-              <span className="text-xl">{link.icon}</span>
-              <span className="capitalize">{link.text}</span>
-            </NavLink>
-          );
-        })}
+
+        <h1 className="text-xl font-semibold mt-4 text-center">
+          {profileData?.personalInfo?.fullName}
+        </h1>
       </div>
 
-      <div className="mt-auto">
-        {/* <Link className="px-5 mt-4 flex items-center justify-start gap-2 text-white tracking-wide font-semibold text-lg rounded-lg py-2 bg-gradient-to-br from-orange-400 to-red-400 max-xl:text-base">
-          <GiUpgrade className="text-xl" />
-          <span>Upgrade to Pro</span>
-        </Link> */}
+      <hr className="my-5 w-[90%] mx-auto border-gray-300" />
 
-        {/* Logout Button */}
+      {/* Navigation Links */}
+      <div className="space-y-1 font-secondaryHead">
+        {links.map((link) => (
+          <NavLink
+            key={link.text}
+            to={link.path}
+            end={link.path === "/profile"} // ✅ VERY IMPORTANT
+            className={({ isActive }) =>
+              `px-4 py-2.5 flex items-center gap-4 rounded-md transition
+              ${
+                isActive
+                  ? "bg-primary text-white"
+                  : "hover:bg-amber-200 text-gray-800"
+              }`
+            }
+          >
+            <span className="text-xl">{link.icon}</span>
+            <span className="capitalize">{link.text}</span>
+          </NavLink>
+        ))}
+      </div>
+
+      {/* Logout */}
+      <div className="mt-auto px-2">
         <button
           onClick={handleLogout}
-          className="mt-3 w-full cursor-pointer text-left px-5 py-2.5 flex items-center gap-2 rounded-lg text-red-500 font-semibold hover:bg-red-50 transition"
+          className="w-full mt-4 px-4 py-2.5 flex items-center gap-3 rounded-lg text-red-500 font-semibold hover:bg-red-100 transition"
         >
           <FiLogOut className="text-xl" />
-          <span>Logout</span>
+          Logout
         </button>
       </div>
     </div>
