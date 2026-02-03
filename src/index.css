@@ -17,7 +17,7 @@
 }
 /*  */
 .custom-scrollbar::-webkit-scrollbar {
-  /* display: none; Chrome, Safari, Opera */
+
   background: #f5f5f5;
   border-radius: 20px;
   width: 4px;

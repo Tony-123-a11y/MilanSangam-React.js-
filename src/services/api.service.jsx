@@ -9,8 +9,8 @@ export const UserVerifyEmailService = (data) => {
   return apiClient.post("/users/verify-email", data);
 };
 
-export const getMatches = (uid) => {
-  return apiClient.get(`/matchprofile/matchuser/${uid}`);
+export const getMatches = (uid,signal) => {
+  return apiClient.get(`/matchprofile/matchuser/${uid}`,{signal});
 };
 
 

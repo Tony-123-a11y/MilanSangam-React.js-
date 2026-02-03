@@ -46,7 +46,7 @@ export default function MyProfile() {
     return age;
   };
   return (
-    <div className="mx-auto bg-white  shadow-sm border border-gray-200">
+    <div className="mx-auto bg-white  shadow-sm ">
       {/* Header */}
       <div className="p-6 border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -57,7 +57,7 @@ export default function MyProfile() {
         </div>
         <Link
           to={"/profile/editProfile"}
-          className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
         >
           <Edit size={18} />
           Edit Profile
@@ -66,7 +66,7 @@ export default function MyProfile() {
 
       <div className="p-6">
         {/* Profile Header Section */}
-        <div className="flex flex-col md:flex-row gap-6  p-6 bg-gradient-to-r from-rose-50 to-pink-50 rounded-lg">
+        <div className="flex flex-col md:flex-row gap-6  p-6 bg-gradient-to-r from-amber-50 to-pink-50 rounded-lg">
           <div className="flex-shrink-0 relative">
             {/* <input type="file" className="hidden" id='profilePic' />
             <label for='profilePic' className="absolute bg-white w-10 h-10 flex items-center justify-center rounded-full cursor-pointer left-3/4 top-3/4">
@@ -85,19 +85,19 @@ export default function MyProfile() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600">
               <div className="flex items-center gap-2">
-                <Calendar size={16} className="text-rose-500" />
+                <Calendar size={16} className="text-amber-500" />
                 <span>{calculateAge(personalInfo?.dob)} years old</span>
               </div>
               <div className="flex items-center gap-2">
-                <User size={16} className="text-rose-500" />
+                <User size={16} className="text-amber-500" />
                 <span>{personalInfo?.gender}</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-rose-500" />
+                <MapPin size={16} className="text-amber-500" />
                 <span>{career?.location || "--"}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Briefcase size={16} className="text-rose-500" />
+                <Briefcase size={16} className="text-amber-500" />
                 <span>{career?.occupation ?? "--"}</span>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function MyProfile() {
           <div className="space-y-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <User className="text-rose-600" size={20} />
+                <User className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Personal Information
                 </h3>
@@ -172,7 +172,7 @@ export default function MyProfile() {
             {/* Contact Information */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Phone className="text-rose-600" size={20} />
+                <Phone className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Contact Information
                 </h3>
@@ -197,7 +197,7 @@ export default function MyProfile() {
             {/* Location Information */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <MapPin className="text-rose-600" size={20} />
+                <MapPin className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Location
                 </h3>
@@ -226,7 +226,7 @@ export default function MyProfile() {
           <div className="space-y-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Heart className="text-rose-600" size={20} />
+                <Heart className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Religious & Cultural
                 </h3>
@@ -275,7 +275,7 @@ export default function MyProfile() {
             {/* Professional Information */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Briefcase className="text-rose-600" size={20} />
+                <Briefcase className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Professional Information
                 </h3>
@@ -312,7 +312,7 @@ export default function MyProfile() {
             {/* Physical & Health */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Activity className="text-rose-600" size={20} />
+                <Activity className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Physical & Health
                 </h3>
@@ -339,7 +339,7 @@ export default function MyProfile() {
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Users className="text-rose-600" size={20} />
+                <Users className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Family & Personal
                 </h3>
@@ -370,7 +370,7 @@ export default function MyProfile() {
             {/* About Me */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <User className="text-rose-600" size={20} />
+                <User className="text-amber-600" size={20} />
                 <h3 className="text-lg font-semibold text-gray-900">
                   About Me
                 </h3>
@@ -396,7 +396,7 @@ export default function MyProfile() {
                       about.interests.map((interest, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-sm font-medium"
+                          className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium"
                         >
                           {interest.trim()}
                         </span>

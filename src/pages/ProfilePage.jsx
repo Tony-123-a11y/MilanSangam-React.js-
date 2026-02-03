@@ -8,26 +8,24 @@ import { useMediaQuery } from "react-responsive";
 const ProfilePage = () => {
   const {loading}= useSelector((state)=>state.user)
   const isMobile= useMediaQuery({maxWidth:768})
-  //   useEffect(() => {
-  //   document.body.style.overflow = loading ? 'hidden' : 'scroll';
-  // }, [loading]);
+ 
   return (
   
-      <div className=" mx-auto flex h-[calc(100vh-70px)]  items-start justify-center ">
+      <div className=" mx-auto flex h-[calc(100vh-10px)]  bg-white items-start justify-center ">
      {
  !isMobile &&  <div className="  h-full bg-white  shadow-sm sticky top-17  w-1/7 max-xl:w-2/7">
         <SideNav />
         </div>
-     }
+     }  
        
 
-        <div className="w-6/7 max-xl:w-8/7 h-full overflow-x-hidden custom-scrollbar  overflow-y-scroll   relative
-        " style={{overflow: loading ? "hidden" : "scroll"}}>
+        <div className="w-6/7 max-xl:w-8/7 h-full overflow-x-hidden  custom-scrollbar  overflow-y-scroll   relative
+        " >
        
         {
           loading &&  <ProfileLoader/>
         }
-          <Outlet />
+          <Outlet/>
         </div>
       </div>
    

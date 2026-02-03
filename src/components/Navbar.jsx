@@ -9,7 +9,7 @@ import HiddenSideNav from "./HiddenSideNav";
 import { AnimatePresence } from "framer-motion";
 import { PersonStanding } from "lucide-react";
 import { useSelector } from "react-redux";
-import SideNav from "./SideNav";
+
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -106,7 +106,7 @@ const Navbar = () => {
                 </div>
 
                 <Link to="/profile/search">Search Your Partner</Link>
-                <Link to="/matches">Perfect Matches</Link>
+                {/* <Link to="/matches">Perfect Matches</Link> */}
                 <Link to="/profile/shortListProfile">Shortlisted Profiles</Link>
                 <Link to="/profile/chats">Messages/Chats</Link>
                 <Link to="/packages">Packages</Link>

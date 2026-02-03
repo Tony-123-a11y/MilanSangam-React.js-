@@ -52,12 +52,12 @@ const ProfileCard = ({
       <Link
         to="/profileDetails"
         state={match}
-        className="relative  w-1/3 max-sm:w-full"
+        className="relative  w-1/3 max-sm:w-full h-full"
       >
         <img
           src={match?.profilePhotos?.[0] || "/placeholder.svg"}
           alt={match?.fullName}
-          className="w-full h-61 object-cover  max-sm:border-b border-gray-300 max-sm:h-64 "
+          className="w-full h-full object-cover  max-sm:border-b border-gray-300  "
         />
       </Link>
 

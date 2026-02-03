@@ -162,7 +162,7 @@ export default function EditProfile() {
         </div>
         <button
           onClick={handleSubmit}
-          className="flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
         >
           <Save size={18} />
           Save Changes
@@ -183,7 +183,7 @@ export default function EditProfile() {
               key={id}
               onClick={() => setActiveTab(id)}
               className={`px-6 py-3 font-medium text-sm whitespace-nowrap ${activeTab === id
-                  ? "border-b-2 border-rose-500 text-rose-600"
+                  ? "border-b-2 border-amber-500 text-amber-600"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                 }`}
             >
@@ -266,7 +266,7 @@ export default function EditProfile() {
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-lg transition-colors"
+            className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
           >
             Save Changes
           </button>
