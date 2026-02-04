@@ -1,7 +1,9 @@
-import { useContext, useState } from "react";
 import {
   Edit,
   User,
+  HeartHandshake,
+  FileText,
+  Sparkles,
   Heart,
   Briefcase,
   MapPin,
@@ -15,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileSkeleton from "./skeletons/ProfileSkeleton";
+import { cn } from "../../utils/toggleClass";
 
 export default function MyProfile() {
   const { user, loading, profileData } = useSelector((state) => state.user);
@@ -22,8 +25,7 @@ export default function MyProfile() {
   if (loading || !profileData) {
     return <ProfileSkeleton />;
   }
-  console.log(user)
-  console.log(profileData);
+
   const {
     personalInfo = {},
     education = {},
@@ -31,11 +33,137 @@ export default function MyProfile() {
     about = {},
     family = {},
     lifeType = {},
-    partnerPreferences = {},
     profilePic,
   } = profileData || {};
-
   const time = new Date(personalInfo?.dob);
+
+
+  const displayObj = {
+    personalInfo: {
+      fullName: personalInfo.fullName,
+      dob: time.getDay() +'/'+ time.getMonth()+'/'+time.getFullYear(),
+      gender: personalInfo.gender,
+      marriageStatus: personalInfo.marriageStatus
+    },
+    professionalInfo: {
+      occupation: career.occupation,
+      annualIncome: career.annualIncome,
+      highestQualifications: education.highestQualification,
+      edDetails: education.educationDetails
+    },
+    religiousInfo: {
+      religion: personalInfo.religion,
+      caste: personalInfo.caste,
+      motherTongue: personalInfo.motherTongue,
+    },
+    contactInfo: {
+      emailId: personalInfo.email,
+      mobileNo: personalInfo.mobile
+    },
+    location: {
+      country: "India",
+      state: personalInfo.state,
+      city: personalInfo.city
+    },
+    aboutMe: {
+      description: about.description,
+      interests: about.interests.toString()
+    },
+    lifeType: {
+      ...lifeType
+    }
+  }
+
+
+  const categoryArr = [
+    {
+      icon: <User />,
+      categoryName: "personalInfo",
+      title: "Personal Information",
+      attributes: [
+        { key: "fullName", title: "Full Name" },
+        { key: "dob", title: "Date of Birth" },
+        { key: "gender", title: "Gender" },
+        { key: "marriageStatus", title: "Marital Status" }
+      ]
+    },
+
+    {
+      icon: <Briefcase />,
+      categoryName: "professionalInfo",
+      title: "Professional Information",
+      attributes: [
+        { key: "occupation", title: "Occupation" },
+        { key: "annualIncome", title: "Annual Income" },
+        { key: "highestQualifications", title: "Highest Qualification" },
+        { key: "edDetails", title: "Education Details" }
+      ]
+    },
+
+    {
+      icon: <HeartHandshake />,
+      categoryName: "religiousInfo",
+      title: "Religious Information",
+      attributes: [
+        { key: "religion", title: "Religion" },
+        { key: "caste", title: "Caste" },
+        { key: "motherTongue", title: "Mother Tongue" }
+      ]
+    },
+
+    {
+      icon: <Phone />,
+      categoryName: "contactInfo",
+      title: "Contact Information",
+      attributes: [
+        { key: "emailId", title: "Email ID" },
+        { key: "mobileNo", title: "Mobile Number" }
+      ]
+    },
+
+    {
+      icon: <MapPin />,
+      categoryName: "location",
+      title: "Location Details",
+      attributes: [
+        { key: "country", title: "Country" },
+        { key: "state", title: "State" },
+        { key: "city", title: "City" }
+      ]
+    },
+
+    {
+      icon: <FileText />,
+      categoryName: "aboutMe",
+      title: "About Me",
+      attributes: [
+        { key: "description", title: "Description" },
+        { key: "interests", title: "Interests" }
+      ]
+    },
+
+    {
+      icon: <Sparkles />,
+      categoryName: "lifeType",
+      title: "Lifestyle",
+      attributes: [
+        { key: "diet", title: "Diet Preference" },
+        { key: "smoking", title: "Smoking Habit" },
+        { key: "drinking", title: "Drinking Habit" }
+      ]
+    }
+  ];
+
+  function getValue(category, attr) {
+    const categObj = displayObj[category]
+    if (!categObj[attr]) {
+      return <p className="text-amber-400 font-semibold">---</p>
+    }
+    return categObj[attr]
+  }
+
+
+ 
   const calculateAge = (dob) => {
     if (!dob) return "--";
     const birthDate = new Date(dob);
@@ -46,9 +174,9 @@ export default function MyProfile() {
     return age;
   };
   return (
-    <div className="mx-auto bg-white  shadow-sm ">
+    <div className="mx-auto bg-white  shadow-sm  p-6">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+      <div className=" border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to={"/profile"} className="p-2 rounded-full hover:bg-gray-100">
             <ArrowLeft size={20} />
@@ -66,12 +194,8 @@ export default function MyProfile() {
 
       <div className="p-6">
         {/* Profile Header Section */}
-        <div className="flex flex-col md:flex-row gap-6  p-6 bg-gradient-to-r from-amber-50 to-pink-50 rounded-lg">
+        <div className="flex flex-col md:flex-row gap-6  p-6 bg-amber-100 rounded-lg">
           <div className="flex-shrink-0 relative">
-            {/* <input type="file" className="hidden" id='profilePic' />
-            <label for='profilePic' className="absolute bg-white w-10 h-10 flex items-center justify-center rounded-full cursor-pointer left-3/4 top-3/4">
-              <Camera color="gray"/>
-            </label> */}
             <img
               src={profilePic?.[0] || "/placeholder.svg"}
               alt="Profile"
@@ -94,7 +218,7 @@ export default function MyProfile() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-amber-500" />
-                <span>{career?.location || "--"}</span>
+                <span>{personalInfo?.city  || "--"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Briefcase size={16} className="text-amber-500" />
@@ -108,309 +232,67 @@ export default function MyProfile() {
           {new Date(user?.createdAt).toLocaleDateString()}
         </h2>
         <div className="grid grid-cols-3 gap-4">
-           {profilePic?.map((photo, index) => (
-               
-                (photo !="null" &&  <div
+          {profilePic?.map((photo, index) => (
+
+            (photo != "null" && <div
               key={index}
               className="aspect-square border border-gray-200 rounded-lg overflow-hidden relative"
             >
-           
-           <img
-                    src={
-                     photo
-                    }
-                    alt={`Profile photo ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
 
-                 
+              <img
+                src={
+                  photo
+                }
+                alt={`Profile photo ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+
+
             </div>)
-              
-           
+
+
           ))}
-      </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Personal Information */}
-          <div className="space-y-6">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <User className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Personal Information
-                </h3>
-              </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Full Name:</span>
-                  <span className="font-medium">{personalInfo?.fullName}</span>
+        {
+          categoryArr.map((category) => {
+            return (
+              <div className="border border-gray-200 bg-amber-50 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <User className="text-amber-600" size={20} />
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {category.title}
+                  </h3>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Date of Birth:</span>
-                  <span className="font-medium">{`${time.getFullYear()}/${time.getMonth()}/${time.getDate()}`}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Gender:</span>
-                  <span className="font-medium">{personalInfo?.gender}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Height:</span>
-                  <span className="font-medium">
-                    {personalInfo?.height ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Marriage Status:</span>
-                  <span className="font-medium">
-                    {personalInfo?.marriageStatus ?? "--"}
-                  </span>
-                </div>
-              </div>
-            </div>
+                <div className="space-y-3 ">
+                  {
+                    category.attributes.map((attrb) => {
+                      return (
 
-            {/* Contact Information */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Phone className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Contact Information
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-gray-400" />
-                  <span className="font-medium">
-                    {personalInfo?.email ?? "--"}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone size={16} className="text-gray-400" />
-                  <span className="font-medium">
-                    {personalInfo?.mobile ?? "--"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Location Information */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <MapPin className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Location
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Country:</span>
-                  <span className="font-medium">{user?.country ?? "--"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">State:</span>
-                  <span className="font-medium">{user?.state ?? "--"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">City:</span>
-                  <span className="font-medium">
-                    {user?.metroCities ?? "--"}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Religious & Cultural Information */}
-          <div className="space-y-6">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Heart className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Religious & Cultural
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Religion:</span>
-                  <span className="font-medium">
-                    {personalInfo?.religion ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Mother Tongue:</span>
-                  <span className="font-medium">
-                    {personalInfo?.motherTongue ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Caste:</span>
-                  <span className="font-medium">
-                    {personalInfo?.caste ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Subcaste:</span>
-                  <span className="font-medium">
-                    {personalInfo?.subcaste ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Gothram:</span>
-                  <span className="font-medium">{user?.gothram ?? "--"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Manglik:</span>
-                  <span className="font-medium">{user?.manglik ?? "--"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Dosh:</span>
-                  <span className="font-medium">{user?.dosh ?? "--"}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Professional Information */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Briefcase className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Professional Information
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Occupation:</span>
-                  <span className="font-medium">
-                    {career?.occupation ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Working Status:</span>
-                  <span className="font-medium">
-                    {career?.workingStatus ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Annual Income:</span>
-                  <span className="font-medium">
-                    {career?.annualIncome ?? "--"}
-                  </span>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-gray-600">Education:</span>
-                  <span className="font-medium text-sm">
-                    {education?.educationDetails ?? "--"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Physical & Health */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Activity className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Physical & Health
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Height:</span>
-                  <span className="font-medium">
-                    {personalInfo?.height ?? "--"}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Physical Disability:</span>
-                  <span className="font-medium">
-                    {personalInfo?.physicalDisability ?? "--"}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Family & Personal Information */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Users className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Family & Personal
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Marriage Status:</span>
-                    <span className="font-medium">
-                      {user?.marriageStatus ?? "--"}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Kids:</span>
-                    <span className="font-medium">{user?.kids ?? "--"}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Siblings:</span>
-                    <span className="font-medium">
-                      {user?.siblings ?? "--"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* About Me */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <User className="text-amber-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  About Me
-                </h3>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">
-                    Description
-                  </h4>
-                  <p className="text-gray-600 leading-relaxed">
-                    {about?.description ?? "--"}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">
-                    Interests & Hobbies
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {Array.isArray(about?.interests) &&
-                    about.interests.length > 0 ? (
-                      about.interests.map((interest, index) => (
-                        <span
-                          key={index}
-                          className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium"
+                        <div
+                          className={cn(
+                            "flex justify-between",
+                            category.categoryName === "aboutMe" && "block"
+                          )}
                         >
-                          {interest.trim()}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="text-gray-500">--</span>
-                    )}
-                  </div>
+
+                          <div className="text-gray-600">{attrb.title}</div>
+                          <div className="font-medium">{getValue(category.categoryName, attrb.key)}</div>
+                        </div>
+
+
+                      )
+                    })
+                  }
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            )
+          })
+        }
       </div>
- 
-  );
+    </div>
+  )
 }
+
