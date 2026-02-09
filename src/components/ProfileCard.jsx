@@ -71,7 +71,7 @@ const ProfileCard = ({
     <div className="flex  overflow-hidden border-2 border-gray-300 rounded-lg  h-70    bg-white max-sm:flex-col max-sm:h-screen">
       {/* Image */}
       <Link
-        to="/profileDetails"
+        to={`/profileDetails/${match._id}`}
         state={match}
         className="relative  w-1/2  max-sm:w-full max-sm:h-1/2 "
       >

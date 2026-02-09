@@ -1,4 +1,6 @@
 import { lazy } from "react";
+import ProfileDetails from "../pages/ProfileDetails";
+
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -26,4 +28,7 @@ export const publicRoutes = [
     { path: "/support", element: <Support /> },
   { path: "/terms", element: <Terms /> },
   { path: "/privacy", element: <Privacy /> },
+  {
+   path:"/profileDetails/:userId", element:<ProfileDetails/>
+  }
 ];

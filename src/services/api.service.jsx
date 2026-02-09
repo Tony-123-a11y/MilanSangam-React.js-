@@ -18,6 +18,10 @@ export const getContacts=()=>{
   return apiClient.get('/messages/getContacts')
 }
 
+export const getProfileDetails=(uid)=>{
+  return apiClient.get(`/users/profileDetails/${uid}`)
+}
+
 export const sendMessages=(profileId,text)=>{
  return apiClient.post(`/messages/sendmessage/${profileId}`,text)
 }
