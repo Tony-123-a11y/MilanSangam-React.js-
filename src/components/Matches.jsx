@@ -23,16 +23,16 @@ if (isLoading) {
    if (error) {
   return <p>Something went wrong while loading matches.</p>
 }
-
+console.log(matches)
 
 
   return (
-    <div className="space-y-6 h-full bg-white ml-auto  py-4 px-5 pb-10 shadow-sm max-sm:px-3  max-lg:w-full ">
+    <div className="space-y-6 h-full bg-white ml-auto  py-4 px-5 pb-10 shadow-sm  max-sm:px-3   max-lg:w-full ">
          {
           matches?.length>0 ? 
         <div>
       <h1 className="text-2xl font-bold text-gray-900">Your Matches</h1>
- <div className="grid grid-cols-2 gap-2 max-sm:gap-6 max-lg:grid-cols-1">
+ <div className="grid grid-cols-2 gap-2 max-sm:gap-6 max-xl:grid-cols-1">
         {matches?.map((match) => {
           const user = match.user;
           return (

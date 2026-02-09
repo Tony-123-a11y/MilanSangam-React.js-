@@ -1,4 +1,5 @@
 import { Heart, MessageSquare, PhoneCall, Star } from "lucide-react";
+import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 // import { useSelector } from "react-redux";
@@ -15,68 +16,87 @@ const ProfileCard = ({
   showShortlist = true,
   showRemoveShortlist = false,
 }) => {
+
+  if(!match){
+    return <p>Match profile Loading</p>
+  }
   const navigate = useNavigate();
+
+  const age = useMemo(() => {
+  if (!match?.dob) return match?.age;
+
+  const dob = new Date(match.dob);
+  const today = new Date();
+
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age;
+}, [match]);
+
   // const { user } = useSelector((state) => state.user);
 
   /* ------------------ ACTIONS (API COMMENTED) ------------------ */
 
   const handleSendInterest = () => {
-    console.log("Send Interest clicked", match?._id);
+    console.log("Send Interest clicked", match._id);
 
     // const res = await sendInterestService({
     //   senderId: user?._id,
-    //   receiverId: match?._id,
+    //   receiverId: match._id,
     // });
     // toast.success(res.data.message);
   };
 
   const handleShortlist = () => {
-    console.log("Shortlist clicked", match?._id);
+    console.log("Shortlist clicked", match._id);
 
-    // const res = await shortListProfileService(match?._id);
+    // const res = await shortListProfileService(match._id);
     // toast.success(res.data.message);
   };
 
   const handleRemoveShortlist = () => {
-    console.log("Remove shortlist clicked", match?._id);
+    console.log("Remove shortlist clicked", match._id);
 
-    // const res = await removeFromShortListService(match?._id);
+    // const res = await removeFromShortListService(match._id);
     // toast.success(res.data.message);
   };
+  console.log(match)
 
   /* ------------------ UI ------------------ */
 
   return (
-    <div className="flex max-sm:block border border-gray-300 rounded-lg overflow-hidden bg-white">
+    <div className="flex  overflow-hidden border-2 border-gray-300 rounded-lg  h-70    bg-white max-sm:flex-col max-sm:h-screen">
       {/* Image */}
       <Link
         to="/profileDetails"
         state={match}
-        className="relative  w-1/3 max-sm:w-full h-full"
+        className="relative  w-1/2  max-sm:w-full max-sm:h-1/2 "
       >
+        <div className="absolute h-full w-1/7 right-0  top-0 bg-gradient-to-l  profileCard max-sm:hidden "/>
         <img
-          src={match?.profilePhotos?.[0] || "/placeholder.svg"}
-          alt={match?.fullName}
-          className="w-full h-full object-cover  max-sm:border-b border-gray-300  "
+          src={match.profilePic?.[0] || "/placeholder.svg"}
+          alt={match.fullName + "  Profile Pic"}
+          className="w-full  object-cover object-top  h-full max-sm:border-b bg-amber-400 border-gray-300 "
         />
       </Link>
 
       {/* Details */}
-      <div className="p-3 pt-6 px-2 w-2/3 max-sm:w-full">
+      <div className="p-3 pt-6 px-2 w-2/3 max-xl:w-1/2 max-sm:w-full ">
         {/* Name + Age */}
         <div className="flex justify-between items-center">
           <h3 className=" font-semibold flex items-center leading-1   w-full justify-between">
-            {match?.fullName}
+            {match.fullName}
           </h3>
           <span className="text-sm text-gray-600">
-            {match?.dob
-              ? new Date().getFullYear() - new Date(match?.dob).getFullYear()
-              : match?.age}
+            {age}
           </span>
         </div>
 
         {/* Match Score */}
-        {match?.matchScore && (
+        {match.matchScore && (
           <p className="text-sm mt-1">
             <span className="font-semibold text-amber-500 tracking-wide">
               Compatibility:
@@ -87,12 +107,16 @@ const ProfileCard = ({
 
         {/* Info */}
         <div className="flex items-center justify-start flex-wrap gap-1 py-4 max-lg:pb-2">
-          <Info label="Marital" value={match?.marriageStatus} />
-          <Info label="Religion" value={match?.religion} />
-          <Info label="Caste" value={match?.caste} />
-          <Info label="City" value={match?.metro} />
-          <Info label="Education" value={match?.educationQualifications} />
-          <Info label="Working" value={match?.workingStatus} />
+          <Info label="Marriage Status" value={match.marriageStatus} />
+          <Info label="Religion" value={match.religion} />
+          <Info label="Caste" value={match.caste} />
+          <Info label="City" value={match.city} />
+          <Info label="State" value={match.state} />
+          <Info label="Height" value={match.height} />
+          <Info label="Employment Type" value={match.employmentType} />
+          <Info label="Education" value={match.highestQualification} />
+          <Info label="Occupation" value={match.occupation} />
+          <Info label="Working" value={match.workingStatus} />
         </div>
 
         {/* Buttons */}
@@ -110,7 +134,7 @@ const ProfileCard = ({
               icon={<MessageSquare size={18} />}
               color="blue"
               onClick={() =>
-                navigate(`/profile/chats/chatpage/${match?._id}`, {
+                navigate(`/profile/chats/chatpage/${match._id}`, {
                   state: match,
                 })
               }
@@ -139,7 +163,7 @@ const ProfileCard = ({
               icon={<PhoneCall size={18} />}
               color="green"
               onClick={() =>
-                alert(`Phone: ${match?.mobile || "Not available"}`)
+                alert(`Phone: ${match.mobile || "Not available"}`)
               }
             />
           </div>
@@ -155,7 +179,7 @@ const Info = ({ label, value }) => {
   if (!value) return null;
   return (
     <span className="text-sm  capitalize text-gray-600 px-2 py-1 border border-gray-200 rounded-lg bg-gray-50">
-      <b>{label}:</b> {value}
+       {value}
     </span>
   );
 };
@@ -172,7 +196,7 @@ const ActionBtn = ({ label, icon, color, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center gap-2 text-xs font-medium p-2 rounded-lg transition ${colors[color]}`}
+      className={`flex items-center cursor-pointer justify-center gap-2 text-xs font-medium p-2 rounded-lg transition ${colors[color]}`}
     >
       {icon}
       {label}

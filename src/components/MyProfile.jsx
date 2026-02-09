@@ -13,6 +13,7 @@ import {
   Mail,
   Calendar,
   ArrowLeft,
+  Images,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -191,7 +192,7 @@ export default function MyProfile() {
           Edit Profile
         </Link>
       </div>
-
+ {/* {Images} */}
       <div className="p-6">
         {/* Profile Header Section */}
         <div className="flex flex-col md:flex-row gap-6  p-6 bg-amber-100 rounded-lg">
@@ -254,6 +255,8 @@ export default function MyProfile() {
           ))}
         </div>
       </div>
+
+      {/* {Detail Tabs} */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         {

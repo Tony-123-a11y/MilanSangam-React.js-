@@ -1,6 +1,6 @@
 export const profiles = [
   {
-    id: "1",
+    _id: "1",
     age: 28,
     caste: "OBC",
     createdAt: "2025-06-01T10:20:45.000Z",
