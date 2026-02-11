@@ -1,14 +1,14 @@
 import { Heart, MessageSquare, PhoneCall, Star } from "lucide-react";
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
-// import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-// import {
-//   sendInterestService,
-//   shortListProfileService,
-//   removeFromShortListService,
-// } from "../services/api.service";
+import {
+  sendInterestService,
+  shortListProfileService,
+  removeFromShortListService,
+} from "../services/api.service";
 
 const ProfileCard = ({
   match,
@@ -40,30 +40,36 @@ const ProfileCard = ({
 
   /* ------------------ ACTIONS (API COMMENTED) ------------------ */
 
-  const handleSendInterest = () => {
-    console.log("Send Interest clicked", match._id);
+const handleSendInterest = async () => {
+  if (!user?._id || !match?.userId) return;
 
-    // const res = await sendInterestService({
-    //   senderId: user?._id,
-    //   receiverId: match._id,
-    // });
-    // toast.success(res.data.message);
+  try {
+    const res = await sendInterestService({
+      senderId: user._id,
+      receiverId: match.userId,
+    });
+
+    toast.success(res.data.message);
+  } catch (err) {
+    toast.error("Failed to send interest");
+  }
+};
+
+
+  const handleShortlist = async() => {
+    console.log("Shortlist clicked", match.profileId);
+
+    const res = await shortListProfileService(match.profileId);
+    toast.success(res.data.message);
   };
 
-  const handleShortlist = () => {
-    console.log("Shortlist clicked", match._id);
+  const handleRemoveShortlist = async() => {
+    console.log("Remove shortlist clicked", match.profileId);
 
-    // const res = await shortListProfileService(match._id);
-    // toast.success(res.data.message);
+    const res = await removeFromShortListService(match.profileId);
+    toast.success(res.data.message);
   };
 
-  const handleRemoveShortlist = () => {
-    console.log("Remove shortlist clicked", match._id);
-
-    // const res = await removeFromShortListService(match._id);
-    // toast.success(res.data.message);
-  };
-  console.log(match)
 
   /* ------------------ UI ------------------ */
 
@@ -192,6 +198,7 @@ const ActionBtn = ({ label, icon, color, onClick }) => {
     green: "bg-green-100 hover:bg-green-200 text-green-600",
     gray: "bg-gray-100 hover:bg-gray-200 text-gray-600",
   };
+
 
   return (
     <button

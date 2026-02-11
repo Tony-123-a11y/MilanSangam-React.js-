@@ -14,7 +14,7 @@ export default function Matches() {
    queryFn: ({signal})=>getMatches(userId,signal),
    enabled:!!userId,
   staleTime: 5 * 60 * 1000,
-   select: (response) => response.data.matches,
+   select: (response) => response.data.matches, 
  })
 if (isLoading) {
   return <p>Loading matches...</p>
@@ -23,7 +23,7 @@ if (isLoading) {
    if (error) {
   return <p>Something went wrong while loading matches.</p>
 }
-console.log(matches)
+
 
 
   return (
@@ -31,12 +31,12 @@ console.log(matches)
          {
           matches?.length>0 ? 
         <div>
-      <h1 className="text-2xl font-bold text-gray-900">Your Matches</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">Your Matches</h1>
  <div className="grid grid-cols-2 gap-2 max-sm:gap-6 max-xl:grid-cols-1">
         {matches?.map((match) => {
           const user = match.user;
           return (
-           <ProfileCard key={match._id} match={match} user={user} />
+           <ProfileCard key={match.userId} match={match} user={user} />
           );
         })}
       </div>
