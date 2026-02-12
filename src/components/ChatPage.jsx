@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+
 import { Loader, Paperclip, Send, Smile } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react'
+import  { useEffect, useRef, useState } from 'react'
 import { getMessages, sendMessages } from '../services/api.service';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
 import socket from '../services/socketInstance';
-import { set } from 'react-hook-form';
+
 
 const ChatPage = () => {
   const {userId}= useParams()
@@ -17,35 +17,7 @@ const ChatPage = () => {
   const location=useLocation()
   console.log(location.state)
 
-  const contacts = [
-    {
-      id: 1,
-      name: "Jessica Parker",
-      lastMessage: "I'd love to meet for coffee sometime",
-      time: "10:30 AM",
-      unread: 2,
-      online: true,
-      image: "/placeholder.svg?height=50&width=50",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      lastMessage: "What are your hobbies?",
-      time: "Yesterday",
-      unread: 0,
-      online: false,
-      image: "/placeholder.svg?height=50&width=50",
-    },
-    {
-      id: 3,
-      name: "Priya Sharma",
-      lastMessage: "Nice to meet you!",
-      time: "Yesterday",
-      unread: 0,
-      online: true,
-      image: "/placeholder.svg?height=50&width=50",
-    },
-  ];
+ 
 
 
 
@@ -114,14 +86,14 @@ try {
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <img
-                      src={location?.state?.profile?.profilePhotos[0] || "/placeholder.svg"}
-                      alt={location.state.user.fullName}
+                      src={location?.state?.profilePhoto || "/placeholder.svg"}
+                      alt={location.state.fullName}
                       className="w-10 h-10 rounded-full object-cover"
                     />
                   
                   </div>
                   <div>
-                    <h3 className="font-medium">{location.state.user.fullName}</h3>
+                    <h3 className="font-medium">{location.state.fullName}</h3>
                     
                   </div>
                 </div>

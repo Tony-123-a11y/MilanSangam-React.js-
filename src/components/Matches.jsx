@@ -23,7 +23,7 @@ if (isLoading) {
    if (error) {
   return <p>Something went wrong while loading matches.</p>
 }
-
+console.log(matches)
 
 
   return (

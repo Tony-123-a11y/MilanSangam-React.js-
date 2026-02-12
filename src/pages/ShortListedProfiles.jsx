@@ -39,12 +39,9 @@ const ShortListedProfiles = () => {
     
   })
 
-  console.log(shortListedProfiles)
 
-  // ✅ TEMP: data.js se shortlist
-  const shortlistedProfiles = profiles.filter(
-    (item) => item.status === "shortlisted"
-  );
+
+
 
    return (
     <div className="space-y-6 h-full bg-white ml-auto  py-4 px-5 pb-10 shadow-sm  max-sm:px-3   max-lg:w-full ">

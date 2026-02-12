@@ -22,7 +22,7 @@ const ProfileCard = ({
   }
   const navigate = useNavigate();
 
-  const age = useMemo(() => {
+  const age = () => {
   if (!match?.dob) return match?.age;
 
   const dob = new Date(match.dob);
@@ -34,18 +34,22 @@ const ProfileCard = ({
     age--;
   }
   return age;
-}, [match]);
+}
+
+
+
+
 
   // const { user } = useSelector((state) => state.user);
 
   /* ------------------ ACTIONS (API COMMENTED) ------------------ */
 
 const handleSendInterest = async () => {
-  if (!user?._id || !match?.userId) return;
+  if (!user?.userId || !match?.userId) return;
 
   try {
     const res = await sendInterestService({
-      senderId: user._id,
+      senderId: user.userId,
       receiverId: match.userId,
     });
 
@@ -57,10 +61,16 @@ const handleSendInterest = async () => {
 
 
   const handleShortlist = async() => {
-    console.log("Shortlist clicked", match.profileId);
-
-    const res = await shortListProfileService(match.profileId);
+ try {
+   const res = await shortListProfileService(match.profileId);
     toast.success(res.data.message);
+ } catch (error) {
+  console.log(error)
+    toast.error(error.response.data.message);
+  
+ }
+
+
   };
 
   const handleRemoveShortlist = async() => {
@@ -77,7 +87,7 @@ const handleSendInterest = async () => {
     <div className="flex  overflow-hidden border-2 border-gray-300 rounded-lg  h-70    bg-white max-sm:flex-col max-sm:h-screen">
       {/* Image */}
       <Link
-        to={`/profileDetails/${match._id}`}
+        to={`/profileDetails/${match.userId}`}
         state={match}
         className="relative  w-1/2  max-sm:w-full max-sm:h-1/2 "
       >
@@ -90,26 +100,26 @@ const handleSendInterest = async () => {
       </Link>
 
       {/* Details */}
-      <div className="p-3 pt-6 px-2 w-2/3 max-xl:w-1/2 max-sm:w-full ">
+      <div className="p-3   px-2 w-2/3 max-xl:w-1/2 max-sm:w-full ">
         {/* Name + Age */}
         <div className="flex justify-between items-center">
           <h3 className=" font-semibold flex items-center leading-1   w-full justify-between">
             {match.fullName}
           </h3>
-          <span className="text-sm text-gray-600">
-            {age}
+          <span className="text-semibold text-gray-600">
+            {age()}
           </span>
         </div>
 
         {/* Match Score */}
-        {match.matchScore && (
+      
           <p className="text-sm mt-1">
             <span className="font-semibold text-amber-500 tracking-wide">
               Compatibility:
             </span>{" "}
-            {(match.matchScore * 100).toFixed(0)}%
+            {match.matchPercentage}%
           </p>
-        )}
+       
 
         {/* Info */}
         <div className="flex items-center justify-start flex-wrap gap-1 py-4 max-lg:pb-2">
@@ -140,8 +150,11 @@ const handleSendInterest = async () => {
               icon={<MessageSquare size={18} />}
               color="blue"
               onClick={() =>
-                navigate(`/profile/chats/chatpage/${match._id}`, {
-                  state: match,
+                navigate(`/profile/chats/chatpage/${match.userId}`, {
+                  state: {
+                    fullName:match.fullName,
+                    profilePhoto: match.profilePic[0],
+                  },
                 })
               }
             />

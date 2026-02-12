@@ -5,7 +5,7 @@ import { getContacts } from '../services/api.service';
 import {useQuery} from '@tanstack/react-query'
 const ChatList = ({showChatList,setShowChatList}) => {
      const [activeChat, setActiveChat] = useState(1);
-   const {data,isLoading,isError}= useQuery(({
+   const {data,isLoading}= useQuery(({
      queryKey:['contacts'],
     queryFn: getContacts
    }))
@@ -26,7 +26,10 @@ console.log(data)
             {data?.data?.contacts?.map((contact) => (
               <Link to={`/profile/chats/chatpage/${contact.user._id}`}
                 key={contact._id}
-                state={contact}
+                state={{
+                  fullName:contact.user.fullName,
+                  profilePhoto:contact.profilePhotos[0]
+                }}
                 onClick={() => {
                   setShowChatList(!showChatList);
                   setActiveChat(contact._id)}}
