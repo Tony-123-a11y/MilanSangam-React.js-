@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { profiles } from "../data/profilesData";
 import ProfileListPage from "./ProfileListPage";
