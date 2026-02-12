@@ -5,8 +5,12 @@ import { logOutUser, updateLoader } from "../Features/Userslice";
 // Create Axios instance
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+    Expires: "0",
+  },
 });
-
 
 // 🔐 Request Interceptor – Attach token
 apiClient.interceptors.request.use(
@@ -28,7 +32,7 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // ❌ Response Interceptor – Handle unauthorized (401)
@@ -45,7 +49,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;
