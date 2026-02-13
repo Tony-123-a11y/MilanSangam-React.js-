@@ -15,11 +15,7 @@ const ChatPage = () => {
   const [message, setMessage] = useState(""); 
   const [messages, setmessages] = useState();
   const location=useLocation()
-  console.log(location.state)
-
- 
-
-
+  
 
   const handleSendMessage = async(e) => {
     e.preventDefault();

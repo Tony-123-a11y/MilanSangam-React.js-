@@ -1,5 +1,7 @@
 import { io } from "socket.io-client";
-const socket = io(import.meta.env.VITE_API_URL,{
+const api= import.meta.env.VITE_API_URL.split('/api')
+console.log(api)
+const socket = io(api[0],{
     transports:['websocket'],
     reconnection:true,
     reconnectionAttempts:5,
