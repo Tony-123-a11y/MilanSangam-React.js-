@@ -1,9 +1,13 @@
-import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfileCard from "../components/ProfileCard";
 
-const ProfileListPage = ({ title, profiles = [], showBtns = false }) => {
+const ProfileListPage = ({
+  title,
+  profiles = [],
+  showBtns = false,
+  extraActions = {},
+}) => {
   return (
     <div className="min-h-screen bg-white p-4">
       {/* Header */}
@@ -21,9 +25,10 @@ const ProfileListPage = ({ title, profiles = [], showBtns = false }) => {
         <div className="mt-4 grid grid-cols-2 gap-4 max-sm:grid-cols-1">
           {profiles.map((profile) => (
             <ProfileCard
-              key={profile.id}   
+              key={profile.profileId}
               match={profile}
               showBtns={showBtns}
+              extraActions={extraActions}
             />
           ))}
         </div>

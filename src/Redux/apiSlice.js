@@ -1,0 +1,115 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_API_URL,
+    credentials: "include",
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
+
+  tagTypes: ["Matches", "Interest", "Shortlist"],
+
+  endpoints: (builder) => ({
+    // ✅ GET MATCHES
+    getMatches: builder.query({
+      query: (userId) => `matchprofile/matchuser/${userId}`,
+      providesTags: ["Matches"],
+    }),
+
+    // ✅ SEND INTEREST
+    sendInterest: builder.mutation({
+      query: (body) => ({
+        url: "interest/send",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Interest", "Matches"],
+    }),
+
+    // ✅ WITHDRAW INTEREST
+    withdrawInterest: builder.mutation({
+      query: (body) => ({
+        url: "interest/withdraw",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Interest"],
+    }),
+
+    // ✅ ACCEPT INTEREST
+    acceptInterest: builder.mutation({
+      query: (body) => ({
+        url: "interest/accept",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Interest"],
+    }),
+
+    // ✅ REJECT INTEREST
+    rejectInterest: builder.mutation({
+      query: (body) => ({
+        url: "interest/reject",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Interest"],
+    }),
+
+    // ✅ GET SENT INTERESTS
+    getSentInterests: builder.query({
+      query: (userId) => `interest/sent/${userId}`,
+      providesTags: (result) =>
+        result?.data?.map((item) => ({ type: "Interest", id: item._id })) || [
+          "Interest",
+        ],
+    }),
+
+    // ✅ GET RECEIVED INTERESTS
+    getReceivedInterests: builder.query({
+      query: (userId) => `interest/received/${userId}`,
+      providesTags: (result) =>
+        result?.data?.map((item) => ({ type: "Interest", id: item._id })) || [
+          "Interest",
+        ],
+    }),
+
+    // ✅ SHORTLIST PROFILE
+    shortListProfile: builder.mutation({
+      query: (matchId) => ({
+        url: `profile/shortlist/${matchId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Shortlist"],
+    }),
+
+    // ✅ REMOVE FROM SHORTLIST
+    removeShortList: builder.mutation({
+      query: (matchId) => ({
+        url: `profile/removeshortlist/${matchId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Shortlist"],
+    }),
+  }),
+});
+
+// ✅ EXPORT HOOKS
+export const {
+  useGetMatchesQuery,
+  useSendInterestMutation,
+  useWithdrawInterestMutation,
+  useAcceptInterestMutation,
+  useRejectInterestMutation,
+  useGetSentInterestsQuery,
+  useGetReceivedInterestsQuery,
+  useShortListProfileMutation,
+  useRemoveShortListMutation,
+} = apiSlice;

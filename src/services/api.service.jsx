@@ -9,9 +9,9 @@ export const UserVerifyEmailService = (data) => {
   return apiClient.post("/users/verify-email", data);
 };
 
-export const getMatches = (uid,signal) => {
-  return apiClient.get(`/matchprofile/matchuser/${uid}`,{signal});
-};
+// export const getMatches = (uid,signal) => {
+//   return apiClient.get(`/matchprofile/matchuser/${uid}`,{signal});
+// };
 
 
 export const getContacts=()=>{
@@ -55,18 +55,18 @@ export const ResetPasswordService = (data) => {
 
 //Short List profile
 
-export const shortListProfileService = (matchId) => {
-  return apiClient.post(`/profile/shortlist/${matchId}`);
-}
+// export const shortListProfileService = (matchId) => {
+//   return apiClient.post(`/profile/shortlist/${matchId}`);
+// }
 
 export const getShortListedProfilesService = () => {
   return apiClient.get('/profile/allshortlistedprofiles');
 }
 
 // ✅ Send interest
-export const sendInterestService = (data) => {
-  return apiClient.post("/interest/send", data);
-};
+// export const sendInterestService = (data) => {
+//   return apiClient.post("/interest/send", data);
+// };
 
 // ✅ Withdraw interest
 export const withdrawInterestService = (data) => {
@@ -74,6 +74,11 @@ export const withdrawInterestService = (data) => {
   return apiClient.post("/interest/withdraw", data);
 };
 
-export const removeFromShortListService = (matchId) => {
-  return apiClient.delete(`/profile/removeshortlist/${matchId}`);
-}
+// export const getSentInterestsService = (userId, signal) => {
+//   return axios.get(`/api/interests/sent/${userId}`, { signal });
+// };
+
+
+// export const removeFromShortListService = (matchId) => {
+//   return apiClient.delete(`/profile/removeshortlist/${matchId}`);
+// }
