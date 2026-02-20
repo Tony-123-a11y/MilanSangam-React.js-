@@ -53,32 +53,15 @@ export const ResetPasswordService = (data) => {
 };
 
 
-//Short List profile
 
-// export const shortListProfileService = (matchId) => {
-//   return apiClient.post(`/profile/shortlist/${matchId}`);
-// }
 
 export const getShortListedProfilesService = () => {
   return apiClient.get('/profile/allshortlistedprofiles');
 }
 
-// ✅ Send interest
-// export const sendInterestService = (data) => {
-//   return apiClient.post("/interest/send", data);
-// };
 
 // ✅ Withdraw interest
 export const withdrawInterestService = (data) => {
-  // data = { senderId, receiverId }
   return apiClient.post("/interest/withdraw", data);
 };
 
-// export const getSentInterestsService = (userId, signal) => {
-//   return axios.get(`/api/interests/sent/${userId}`, { signal });
-// };
-
-
-// export const removeFromShortListService = (matchId) => {
-//   return apiClient.delete(`/profile/removeshortlist/${matchId}`);
-// }

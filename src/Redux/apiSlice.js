@@ -98,6 +98,18 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Shortlist"],
     }),
+
+    // ✅ GET ACCEPTED PROFILES
+    getAcceptedProfiles: builder.query({
+      query: (userId) => `profile-status/accepted/${userId}`,
+      providesTags: ["Interest"],
+    }),
+
+    // ✅ GET REJECTED PROFILES
+    getRejectedProfiles: builder.query({
+      query: (userId) => `profile-status/rejected/${userId}`,
+      providesTags: ["Interest"],
+    }),
   }),
 });
 
@@ -110,6 +122,8 @@ export const {
   useRejectInterestMutation,
   useGetSentInterestsQuery,
   useGetReceivedInterestsQuery,
+  useGetAcceptedProfilesQuery,
+  useGetRejectedProfilesQuery,
   useShortListProfileMutation,
   useRemoveShortListMutation,
 } = apiSlice;

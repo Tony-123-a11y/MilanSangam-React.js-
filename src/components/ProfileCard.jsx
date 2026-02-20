@@ -33,24 +33,13 @@ const ProfileCard = ({
   const [removeShortList, { isLoading: removingShortlist }] =
     useRemoveShortListMutation();
 
-  /* ---------------- LOCAL STATE ---------------- */
+ const [localInterestSent, setLocalInterestSent] = useState(
+  match?.interestSent || false
+);
 
-  const [interestStatus, setInterestStatus] = useState("none");
-
-  /* ---------------- SYNC STATUS FROM API ---------------- */
-
-  useEffect(() => {
-    if (!match) return;
-
-    if (match.interestSent) {
-      setInterestStatus("sent");
-    } else if (match.interestReceived) {
-      setInterestStatus("received");
-    } else {
-      setInterestStatus("none");
-    }
-  }, [match]);
-
+useEffect(() => {
+  setLocalInterestSent(match?.interestSent || false);
+}, [match?.interestSent]);
   /* ---------------- DERIVED VALUES ---------------- */
 
   const age = useMemo(() => {
@@ -66,13 +55,19 @@ const ProfileCard = ({
     return calculatedAge > 0 ? calculatedAge : "";
   }, [match?.dob]);
 
-  const isInterestSent = interestStatus === "sent";
+ const isInterestSent = localInterestSent;
+  const isInterestReceived = match?.interestReceived;
+  const isMatched = match?.matched;
 
-  const isInterestReceived = interestStatus === "received";
+  const interestBtnDisabled = isInterestSent || isMatched || sendingInterest;
 
-  const interestBtnLabel = isInterestSent ? "Interest Sent" : "Send Interest";
-
-  const interestBtnDisabled = isInterestSent || sendingInterest;
+  const interestBtnLabel = sendingInterest
+    ? "Sending..."
+    : isMatched
+      ? "Matched"
+      : isInterestSent
+        ? "Interest Sent"
+        : "Send Interest";
 
   /* ---------------- ACTIONS ---------------- */
 
@@ -90,7 +85,7 @@ const ProfileCard = ({
 
       toast.success(res?.message || "Interest sent successfully");
 
-      setInterestStatus("sent");
+     setLocalInterestSent(true);
     } catch (err) {
       toast.error(err?.data?.message || "Failed to send interest");
     }
@@ -181,7 +176,7 @@ const ProfileCard = ({
             <ActionBtn
               label={interestBtnLabel}
               icon={<Heart size={18} />}
-              color="rose"
+              color={isMatched ? "green" : "rose"}
               disabled={interestBtnDisabled}
               onClick={!interestBtnDisabled ? handleSendInterest : undefined}
             />
