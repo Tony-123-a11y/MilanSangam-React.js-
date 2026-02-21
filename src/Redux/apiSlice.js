@@ -72,7 +72,7 @@ export const apiSlice = createApi({
         ],
     }),
 
-    // ✅ GET RECEIVED INTERESTS
+    //  GET RECEIVED INTERESTS
     getReceivedInterests: builder.query({
       query: (userId) => `interest/received/${userId}`,
       providesTags: (result) =>
@@ -81,24 +81,45 @@ export const apiSlice = createApi({
         ],
     }),
 
-    // ✅ SHORTLIST PROFILE
+    //  SHORTLIST PROFILE
     shortListProfile: builder.mutation({
-      query: (matchId) => ({
-        url: `profile/shortlist/${matchId}`,
+      query: (targetUserId) => ({
+        url: `shortlist/${targetUserId}`,
         method: "POST",
       }),
-      invalidatesTags: ["Shortlist"],
+      invalidatesTags: [
+        { type: "Shortlist", id: "LIST" },
+        { type: "Matches", id: "LIST" },
+      ],
     }),
 
-    // ✅ REMOVE FROM SHORTLIST
+    //  GET ALL SHORTLISTED PROFILES
+    getAllShortlistedProfiles: builder.query({
+      query: () => "shortlist",
+
+      providesTags: (result) =>
+        result?.profiles
+          ? [
+              ...result.profiles.map((profile) => ({
+                type: "Shortlist",
+                id: profile._id,
+              })),
+              { type: "Shortlist", id: "LIST" },
+            ]
+          : [{ type: "Shortlist", id: "LIST" }],
+    }),
+
+    //  REMOVE FROM SHORTLIST
     removeShortList: builder.mutation({
-      query: (matchId) => ({
-        url: `profile/removeshortlist/${matchId}`,
+      query: (targetUserId) => ({
+        url: `shortlist/${targetUserId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Shortlist"],
+      invalidatesTags: [
+        { type: "Shortlist", id: "LIST" },
+        { type: "Matches", id: "LIST" },
+      ],
     }),
-
     // ✅ GET ACCEPTED PROFILES
     getAcceptedProfiles: builder.query({
       query: (userId) => `profile-status/accepted/${userId}`,
@@ -126,4 +147,5 @@ export const {
   useGetRejectedProfilesQuery,
   useShortListProfileMutation,
   useRemoveShortListMutation,
+  useGetAllShortlistedProfilesQuery,
 } = apiSlice;
