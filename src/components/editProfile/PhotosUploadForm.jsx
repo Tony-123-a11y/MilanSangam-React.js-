@@ -8,7 +8,7 @@ const PhotosUploadForm = ({
   handlePhotoUpload,
   handleRemovePhoto,
 }) => {
-  console.log(photos)
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -26,14 +26,13 @@ const PhotosUploadForm = ({
       />
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-         
         {photos.map((photo, index) => (
             <div
               key={index}
               className="aspect-square border border-gray-200 rounded-lg overflow-hidden relative"
             >
           
-              {photo !=='null'  ? (
+              {photo !==null  ? (
                 <>
                   <img
                     src={

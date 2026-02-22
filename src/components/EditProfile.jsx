@@ -42,8 +42,7 @@ export default function EditProfile() {
 
   const [activeTab, setActiveTab] = useState("personal");
   const fileInputRef = useRef(null);
-
-
+  const max_photos=6;
 
   useEffect(() => {
     if (profileData) {
@@ -62,9 +61,16 @@ export default function EditProfile() {
           religionCaste: { religion: "", caste: "" },
           location: { country: "", state: "", city: "" },
         },
+        profilePhotos:profileData.profilePhotos
 
       }));
-      setPhotos(profileData?.profilePic);
+      console.log(profileData.profilePhotos)
+
+      const slots= [...profileData.profilePhotos]
+      while(slots.length<max_photos){
+          slots.push(null)  
+      }
+      setPhotos(slots);
 
     }
   }, [profileData]);
@@ -79,24 +85,27 @@ export default function EditProfile() {
     }));
   };
 
+  
+
   const handlePhotoUpload = () => {
-    console.log('hello')
-    const photo = [...fileInputRef.current.files]
-    console.log(photo)
-    const fileArr = [...photos]
-    let flag = false
-    fileArr.map((file, i) => {
-      if (file == 'null' && !flag) {
-        fileArr[i] = photo[0]
-        flag = true
+  
+    const newPhotos = [...fileInputRef.current.files]
+    console.log(newPhotos)
+    const prevPhotos = [...photos]
+    let index= prevPhotos.findIndex(p => p==null);
+     if(index==-1){
+      return "No space found with null value";
+     }
+     for (const photo  of newPhotos) {
+        if(index > max_photos){
+          console.log("Array is full")
+          break;
+        }
+        prevPhotos[index]=photo;
+        index++;
+     }
 
-      }
-      else {
-        fileArr[i] == null
-      }
-    })
-
-    setPhotos(fileArr)
+    setPhotos(prevPhotos)
 
 
   };
@@ -104,7 +113,7 @@ export default function EditProfile() {
 
   const handleRemovePhoto = (index) => {
     const newPhotos = [...photos];
-    newPhotos[index] = 'null';
+    newPhotos[index] = null;
     setPhotos(newPhotos);
   };
 
@@ -138,8 +147,9 @@ export default function EditProfile() {
     e.preventDefault();
     const formDataFinal = new FormData()
     formDataFinal.append('formData', JSON.stringify(formData))
-    photos.forEach((photo) => {
-      formDataFinal.append('profilePhotos', photo)
+    const finalPhotos= photos.filter((ele)=>ele instanceof File)
+    finalPhotos.forEach((photo) => {
+      formDataFinal.append('photos', photo)
     })
     // formDataFinal.append('profilePhotos',photos)
     for (const [key, value] of formDataFinal.entries()) {
