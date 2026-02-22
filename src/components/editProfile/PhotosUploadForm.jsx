@@ -1,13 +1,57 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Camera, X } from "lucide-react";
-
+import { removePhoto, uploadPhoto } from "../../services/api.service";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "../../Features/Userslice";
+import { toast } from "react-toastify";
 const PhotosUploadForm = ({
   photos,
-  fileInputRef,
-  setPhotos,
-  handlePhotoUpload,
-  handleRemovePhoto,
+  
+  
 }) => {
+  const dispatch=useDispatch();
+  const [index,SetIndex]=React.useState();
+  const fileInputRef = useRef(null);
+ async function handlePhotoUpload(){
+  try {
+      const files= fileInputRef.current.files;
+      let count=0;
+     for (const element of photos) {
+       if(!element){
+        count++;
+       }
+     }
+     if([...files].length> count){
+       return alert(`You can only upload ${count} photos`)
+     }
+    const formData= new FormData();
+    [...files].map((photo)=>{
+        formData.append('photos',photo);
+    })
+   
+    formData.append('index',JSON.stringify({index}))
+      for (const [key, value] of formData.entries()) {
+      console.log(key, value)
+    }
+    const res = await uploadPhoto(formData);
+     dispatch(fetchUser());
+     toast.success("Photos uploaded succesfully")
+  } catch (error) {
+    console.log(error)
+  }
+
+ } 
+
+ async function handleRemovePhoto(photoURL,index){
+     try {
+      console.log(photoURL,index)
+       const res =await removePhoto({photoURL,index})
+           dispatch(fetchUser());
+     toast.success("Photos deleted succesfully")
+     } catch (error) {
+      console.log(error)
+     }
+ }
 
   return (
     <div className="space-y-6">
@@ -18,8 +62,8 @@ const PhotosUploadForm = ({
       <input
         type="file"
         ref={fileInputRef}
-        multiple
         className="hidden"
+        multiple
         accept="image/*"
         id="photo"
         onChange={() => handlePhotoUpload()}
@@ -46,7 +90,7 @@ const PhotosUploadForm = ({
 
                   <button
                     type="button"
-                    onClick={() => handleRemovePhoto(index)}
+                    onClick={() => handleRemovePhoto(photo,index)}
                     className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:bg-gray-100"
                   >
                     <X size={16} className="text-gray-700" />
@@ -54,6 +98,7 @@ const PhotosUploadForm = ({
                 </>
               ) : (
                 <label
+                   onClick={()=>SetIndex(index)}
                   htmlFor="photo"
                   className="w-full h-full flex flex-col cursor-pointer items-center justify-center bg-amber-50 hover:bg-gray-100"
                 >

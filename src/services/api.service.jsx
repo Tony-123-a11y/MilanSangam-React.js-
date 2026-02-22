@@ -42,6 +42,14 @@ export const getUser =()=>{
 export const editProfile =(editedData)=>{
   return apiClient.patch('/users/editProfile',editedData)
 }
+
+export const uploadPhoto=(formData)=>{
+  return apiClient.post('/users/upload-photo',formData)
+}
+
+export const removePhoto=(fileData)=>{
+  return apiClient.delete('/users/remove-photo',{data:fileData})
+}
 // Forgot Password API
 export const ForgotPasswordService = (data) => {
   return apiClient.post("/users/forget-password", data);

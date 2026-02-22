@@ -64,13 +64,9 @@ export default function EditProfile() {
         profilePhotos:profileData.profilePhotos
 
       }));
-      console.log(profileData.profilePhotos)
+     
 
-      const slots= [...profileData.profilePhotos]
-      while(slots.length<max_photos){
-          slots.push(null)  
-      }
-      setPhotos(slots);
+      setPhotos(profileData.profilePhotos);
 
     }
   }, [profileData]);
@@ -87,35 +83,10 @@ export default function EditProfile() {
 
   
 
-  const handlePhotoUpload = () => {
-  
-    const newPhotos = [...fileInputRef.current.files]
-    console.log(newPhotos)
-    const prevPhotos = [...photos]
-    let index= prevPhotos.findIndex(p => p==null);
-     if(index==-1){
-      return "No space found with null value";
-     }
-     for (const photo  of newPhotos) {
-        if(index > max_photos){
-          console.log("Array is full")
-          break;
-        }
-        prevPhotos[index]=photo;
-        index++;
-     }
-
-    setPhotos(prevPhotos)
 
 
-  };
 
 
-  const handleRemovePhoto = (index) => {
-    const newPhotos = [...photos];
-    newPhotos[index] = null;
-    setPhotos(newPhotos);
-  };
 
   const handlePartnerPreferences = (e, field) => {
     const { name, value } = e.target;
@@ -225,10 +196,6 @@ export default function EditProfile() {
         {activeTab === "photos" && (
           <PhotosUploadForm
             photos={photos}
-            setPhotos={setPhotos}
-            fileInputRef={fileInputRef}
-            handlePhotoUpload={handlePhotoUpload}
-            handleRemovePhoto={handleRemovePhoto}
           />
         )}
         {activeTab === "career" && (
