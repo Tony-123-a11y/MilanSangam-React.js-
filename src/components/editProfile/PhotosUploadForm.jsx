@@ -85,7 +85,7 @@ const PhotosUploadForm = ({
                         : URL.createObjectURL(photo)
                     }
                     alt={`Profile photo ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
 
                   <button

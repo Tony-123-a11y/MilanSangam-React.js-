@@ -34,7 +34,7 @@ export default function MyProfile() {
     about = {},
     family = {},
     lifeType = {},
-    profilePic,
+    profilePhotos,
   } = profileData || {};
   const time = new Date(personalInfo?.dob);
 
@@ -198,9 +198,9 @@ export default function MyProfile() {
         <div className="flex flex-col md:flex-row gap-6  p-6 bg-amber-100 rounded-lg">
           <div className="flex-shrink-0 relative">
             <img
-              src={profilePic?.[0] || "/placeholder.svg"}
+              src={profilePhotos?.[0] || "/placeholder.svg"}
               alt="Profile"
-              className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-lg"
+              className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-lg object-top"
             />
           </div>
 
@@ -233,9 +233,9 @@ export default function MyProfile() {
           {new Date(user?.createdAt).toLocaleDateString()}
         </h2>
         <div className="grid grid-cols-3 gap-4">
-          {profilePic?.map((photo, index) => (
+          {profilePhotos?.map((photo, index) => (
 
-            (photo != "null" && <div
+            (photo != null && <div
               key={index}
               className="aspect-square border border-gray-200 rounded-lg overflow-hidden relative"
             >
@@ -245,7 +245,7 @@ export default function MyProfile() {
                   photo
                 }
                 alt={`Profile photo ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
 
 

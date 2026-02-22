@@ -99,11 +99,11 @@ const SideNav = () => {
           to="/profile/myProfile"
           className="w-16 h-16 rounded-full border bg-gray-100 flex items-center justify-center"
         >
-          {profileData?.profilePic?.[0] ? (
+          {profileData?.profilePhotos?.[0] ? (
             <img
-              src={profileData.profilePic[0]}
+              src={profileData.profilePhotos[0]}
               alt="Profile"
-              className="w-16 h-16 rounded-full object-cover"
+              className="w-16 h-16 rounded-full object-cover object-top"
             />
           ) : (
             <CgProfile className="text-4xl text-gray-400" />
