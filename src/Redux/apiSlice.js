@@ -14,16 +14,23 @@ export const apiSlice = createApi({
     },
   }),
 
-  tagTypes: ["Matches", "Interest", "Shortlist"],
+  tagTypes: [
+    "Matches",
+    "Interest",
+    "Shortlist",
+    "Package",
+    "Payment",
+    "Contact",
+  ],
 
   endpoints: (builder) => ({
-    // ✅ GET MATCHES
+    //  GET MATCHES
     getMatches: builder.query({
       query: (userId) => `matchprofile/matchuser/${userId}`,
       providesTags: ["Matches"],
     }),
 
-    // ✅ SEND INTEREST
+    //  SEND INTEREST
     sendInterest: builder.mutation({
       query: (body) => ({
         url: "interest/send",
@@ -33,7 +40,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Interest", "Matches"],
     }),
 
-    // ✅ WITHDRAW INTEREST
+    //  WITHDRAW INTEREST
     withdrawInterest: builder.mutation({
       query: (body) => ({
         url: "interest/withdraw",
@@ -43,7 +50,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Interest"],
     }),
 
-    // ✅ ACCEPT INTEREST
+    //  ACCEPT INTEREST
     acceptInterest: builder.mutation({
       query: (body) => ({
         url: "interest/accept",
@@ -53,7 +60,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Interest"],
     }),
 
-    // ✅ REJECT INTEREST
+    //  REJECT INTEREST
     rejectInterest: builder.mutation({
       query: (body) => ({
         url: "interest/reject",
@@ -63,7 +70,7 @@ export const apiSlice = createApi({
       invalidatesTags: ["Interest"],
     }),
 
-    // ✅ GET SENT INTERESTS
+    //  GET SENT INTERESTS
     getSentInterests: builder.query({
       query: (userId) => `interest/sent/${userId}`,
       providesTags: (result) =>
@@ -120,21 +127,54 @@ export const apiSlice = createApi({
         { type: "Matches", id: "LIST" },
       ],
     }),
-    // ✅ GET ACCEPTED PROFILES
+    //  GET ACCEPTED PROFILES
     getAcceptedProfiles: builder.query({
       query: (userId) => `profile-status/accepted/${userId}`,
       providesTags: ["Interest"],
     }),
 
-    // ✅ GET REJECTED PROFILES
+    //  GET REJECTED PROFILES
     getRejectedProfiles: builder.query({
       query: (userId) => `profile-status/rejected/${userId}`,
       providesTags: ["Interest"],
     }),
+
+    //  GET ALL PACKAGES
+    getAllPackages: builder.query({
+      query: () => "packages",
+      providesTags: ["Package"],
+    }),
+
+    //  CREATE RAZORPAY ORDER
+    createOrder: builder.mutation({
+      query: (packageId) => ({
+        url: `payment/create-order/${packageId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Payment"],
+    }),
+
+    //  VERIFY PAYMENT
+    verifyPayment: builder.mutation({
+      query: (body) => ({
+        url: "payment/verify",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Payment"],
+    }),
+
+    //  VIEW CONTACT
+    viewContact: builder.mutation({
+      query: (targetUserId) => ({
+        url: `contact/view-contact/${targetUserId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-// ✅ EXPORT HOOKS
+//  EXPORT HOOKS
 export const {
   useGetMatchesQuery,
   useSendInterestMutation,
@@ -148,4 +188,8 @@ export const {
   useShortListProfileMutation,
   useRemoveShortListMutation,
   useGetAllShortlistedProfilesQuery,
+  useGetAllPackagesQuery,
+  useCreateOrderMutation,
+  useVerifyPaymentMutation,
+  useViewContactMutation,
 } = apiSlice;

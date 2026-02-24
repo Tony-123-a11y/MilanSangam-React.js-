@@ -12,7 +12,7 @@ export default function Matches() {
     skip: !userId,
   });
 
-const matches = data?.matches || [];
+  const matches = data?.matches || [];
 
   if (isLoading) {
     return <p>Loading matches...</p>;

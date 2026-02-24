@@ -60,16 +60,3 @@ export const ResetPasswordService = (data) => {
   return apiClient.post("/users/reset-password", data);
 };
 
-
-
-
-export const getShortListedProfilesService = () => {
-  return apiClient.get('/profile/allshortlistedprofiles');
-}
-
-
-// ✅ Withdraw interest
-export const withdrawInterestService = (data) => {
-  return apiClient.post("/interest/withdraw", data);
-};
-
